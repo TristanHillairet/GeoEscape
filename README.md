@@ -1,2 +1,2 @@
 lien base de donnée phpMyAdmin : http://localhost/phpMyAdmin/
-test Tristan GIT
+Ai réussi à faire marcher GIT stv je pourrai te faire un cours express
