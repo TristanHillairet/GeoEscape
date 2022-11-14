@@ -1,1 +1,1 @@
-lien base de donnée phpMyAdmin : http://localhost/phpMyAdmin/ 
+lien base de donnée phpMyAdmin : http://localhost/phpMyAdmin/ test 
