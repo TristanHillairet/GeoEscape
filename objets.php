@@ -14,7 +14,6 @@ $resultat = [];
 if(isset($result)){
   while($rows = mysqli_fetch_assoc($result)){
     $resultat[]=$rows;
-    // echo '<option value="'.$rows["x"].'">'.$rows["y"]
   }
   echo json_encode($resultat,JSON_NUMERIC_CHECK);
 }elseif(!isset($result)){

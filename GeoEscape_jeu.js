@@ -13,7 +13,7 @@ map.addLayer(mark);
 let marker = L.marker([48.85, 2.35]);
 
 var data = 'id='+1;
-
+// bon
 fetch('objets.php', {
   method: 'post',
   body: data,
