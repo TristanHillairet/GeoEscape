@@ -1,3 +1,4 @@
+
 <?php
 
 $link = mysqli_connect('localhost', 'root', 'root', 'objet_geoescape');
@@ -5,18 +6,18 @@ mysqli_set_charset($link, "utf8");
 
 if (!$link) {
     die('Erreur de connexion');
-  } else {
-    echo 'Succès... ';
+  } 
+
+$data=$_POST['id'];  
+$result = mysqli_query($link, "SELECT zoom_min FROM objet where id_objet=".$_POST['id']);
+$resultat = [];
+if(isset($result)){
+  while($rows = mysqli_fetch_assoc($result)){
+    $resultat[]=$rows;
+    // echo '<option value="'.$rows["x"].'">'.$rows["y"]
   }
-
-$results = mysqli_query($link, "SELECT zoom_min FROM objet where id=1");
-
-$resultat = []
-
-foreach ($results as $result) {
-    $resultat[] = $result;
-}
-
-echo json_encode($resultat);
-
+  echo json_encode($resultat,JSON_NUMERIC_CHECK);
+}elseif(!isset($result)){
+  echo "La requete n'est pas bonne";
+}  
 ?>

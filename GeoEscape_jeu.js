@@ -49,4 +49,5 @@ map.on('zoom', function(){
 })
 
 
+
 // coord moulin d'amsterdam : 52.36674, 4.92621
