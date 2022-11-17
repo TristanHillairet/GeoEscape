@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost:3306
--- Généré le : jeu. 17 nov. 2022 à 13:22
+-- Généré le : jeu. 17 nov. 2022 à 13:30
 -- Version du serveur : 5.7.24
 -- Version de PHP : 8.0.1
 
@@ -52,8 +52,8 @@ CREATE TABLE `objet` (
   `id_icone` int(11) NOT NULL,
   `nom` text NOT NULL,
   `zoom_min` int(11) NOT NULL,
-  `lat` int(11) NOT NULL,
-  `lon` int(11) NOT NULL
+  `lat` double NOT NULL,
+  `lon` double NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -61,7 +61,7 @@ CREATE TABLE `objet` (
 --
 
 INSERT INTO `objet` (`id_objet`, `id_icone`, `nom`, `zoom_min`, `lat`, `lon`) VALUES
-(1, 1, 'statue_de_la_liberte', 14, 52, 5);
+(1, 1, 'statue_de_la_liberte', 14, 52.36674, 4.92621);
 
 --
 -- Index pour les tables déchargées
