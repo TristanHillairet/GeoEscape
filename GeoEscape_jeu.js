@@ -3,17 +3,21 @@
 let amsterdam = [52.36674, 4.92621];
 let map = L.map('map').setView(amsterdam, 13);
 
+// var mapOptions = {
+//   center : [52.36674, 4.92621];
+//   zoom: 7;
+// }
+// var map = new L.map('map', mapOptions); //Creation d'un objet map
+
+// var layer = new L.TileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png');
+// map.addLayer(layer); // ajout du layer à la map
+
 L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
 }).addTo(map);
 
-let mark = new L.LayerGroup();
-map.addLayer(mark);
-
-let marker = L.marker([48.85, 2.35]);
-
 var data = 'id='+1;
-// bon
+
 fetch('objets.php', {
   method: 'post',
   body: data,
@@ -21,14 +25,37 @@ fetch('objets.php', {
     'Content-Type': 'application/x-www-form-urlencoded'
   }
 })
-.then(r =>  r.json())
+.then(r => r.json())
 .then(r => {
-  console.log(r)
+  let lat = r[0]['lat'];
+  let lon = r[0]['lon'];
+  let zoom_min = r[0]['zoom_min'];
+  let id = r[0]['id_objet'];
+  map.on('zoom', function(){
+    afficher_marker(lat,lon,zoom_min,id);
+  });
 })
 
+var layerGroup = new L.layerGroup();
+layerGroup.addTo(map);
+
+function afficher_marker(lat,lon,zoom_min,id){
+  var mark = new L.Marker([lat,lon], {icon: icon_statut});
+  // let layerGroup = L.layerGroup([mark]);
+  // layerGroup.addTo(map);
+  var zoom = map.getZoom();
+  console.log(zoom);
+  if (zoom > zoom_min){
+    layerGroup.addLayer(mark);
+  } else {
+    console.log(lat)
+    layerGroup.removeLayer(mark);
+  }
+}
 
 
-var icon_statut = L.icon({
+
+ var icon_statut = L.icon({
     iconUrl: 'image_icon/statue-of-liberty.png',
     // iconShadow:
     iconSize:     [56, 56], // size of the icon
@@ -38,15 +65,16 @@ var icon_statut = L.icon({
     popupAnchor:  [-3, -20] // point from which the popup should open relative to the iconAnchor
 })
 
-let marker_ams = L.marker([52.36674, 4.92621], {icon: icon_statut})
-map.on('zoom', function(){
-    var zoom = map.getZoom();
-    if (zoom > 14){
-        marker_ams.addTo(mark);
-    } else{
-        mark.clearLayers();
-    }
-})
+// let marker_ams = L.marker([52.36674, 4.92621], {icon: icon_statut})
+// map.on('zoom', function(){
+//     var zoom = map.getZoom();
+//     console.log(zoom);
+//     if (zoom > 14){
+//         marker_ams.addTo(layer);
+//     } else{
+//         layer.clearLayers();
+//     }
+// })
 
 
 

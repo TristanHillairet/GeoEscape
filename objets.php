@@ -9,7 +9,7 @@ if (!$link) {
   } 
 
 $data=$_POST['id'];  
-$result = mysqli_query($link, "SELECT zoom_min FROM objet where id_objet=".$_POST['id']);
+$result = mysqli_query($link, "SELECT * FROM objet where id_objet=".$_POST['id']);
 $resultat = [];
 if(isset($result)){
   while($rows = mysqli_fetch_assoc($result)){
