@@ -9,8 +9,11 @@ if (!$link) {
   } 
 
 $data=$_POST['id'];  
-$result = mysqli_query($link, "SELECT * FROM objet where id_objet=".$_POST['id']);
+$result = mysqli_query($link, "SELECT * FROM objet");
 $resultat = [];
+
+
+
 if(isset($result)){
   while($rows = mysqli_fetch_assoc($result)){
     $resultat[]=$rows;
@@ -19,4 +22,5 @@ if(isset($result)){
 }elseif(!isset($result)){
   echo "La requete n'est pas bonne";
 }  
+
 ?>

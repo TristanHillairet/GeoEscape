@@ -16,6 +16,16 @@ L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
 }).addTo(map);
 
+
+var layerGroup_10 = new L.layerGroup();
+layerGroup_10.addTo(map);
+
+var layerGroup_14 = new L.layerGroup();
+layerGroup_14.addTo(map);
+
+var layerGroup_16 = new L.layerGroup();
+layerGroup_16.addTo(map);
+
 var data = 'id='+1;
 
 // on va chercher les infos des objets de la base de donnée avec le fetch
@@ -29,44 +39,67 @@ fetch('objets.php', {
 })
 .then(r => r.json())
 .then(r => {
-  let lat = r[0]['lat'];
-  let lon = r[0]['lon'];
-  let zoom_min = r[0]['zoom_min'];
-  let id = r[0]['id_objet'];
+  for(let i=0;i<12;i++){
+    let lat = r[i]['lat'];
+    let lon = r[i]['lon'];
+    let zoom_min = r[i]['zoom_min'];
+    let id = r[i]['id_objet'];
+    let id_icone = r[i]['id_icone'];
+    let debut = r[i]['debut'];
 
-  var layerGroup = new L.layerGroup();
-  layerGroup.addTo(map);
-  var mark = new L.Marker([lat,lon], {icon: icon_statut});
-  layerGroup.addLayer(mark);
-
-  map.on('zoom', function(){
-    afficher_marker(mark,lat,lon,zoom_min,id);
-  });
+    if (debut == 1){
+      if (zoom_min == 10){
+        creer_marker_10(lat,lon);
+      } else if (zoom_min == 14){
+        creer_marker_14(lat,lon);
+      } else if (zoom_min == 16){
+        creer_marker_16(lat,lon);
+      }
+    }
+    map.on('zoom', function(){
+      console.log(map.getZoom());
+      console.log(layerGroup_10.getLayers())
+      afficher_marker(mark,zoom_min);
+    });
+  }
 })
 
 
+function creer_marker_10(lat,lon){
+  var mark = new L.Marker([lat,lon], {icon: icon_statut});
+  layerGroup_10.addLayer(mark);
+}
 
-function afficher_marker(mark,lat,lon,zoom_min,id){
+function creer_marker_14(lat,lon){
+  var mark = new L.Marker([lat,lon], {icon: icon_statut});
+  layerGroup_14.addLayer(mark);
+}
+
+function creer_marker_16(lat,lon){
+  var mark = new L.Marker([lat,lon], {icon: icon_statut});
+  layerGroup_16.addLayer(mark);
+}
+
+
+function afficher_marker(mark,zoom_min){
   var zoom = map.getZoom();
-  console.log(zoom, zoom_min);
   if (zoom > zoom_min){
     mark.setOpacity(1);
   } else {
     mark.setOpacity(0);
-    console.log(mark)
   }
 }
 
 
 
- var icon_statut = L.icon({
-    iconUrl: 'image_icon/statue-of-liberty.png',
-    // iconShadow:
-    iconSize:     [56, 56], // size of the icon
-    // shadowSize:   [50, 64], // size of the shadow
-    iconAnchor:   [25, 25], // point of the icon which will correspond to marker's location
-    // shadowAnchor: [4, 62],  // the same for the shadow
-    popupAnchor:  [-3, -20] // point from which the popup should open relative to the iconAnchor
+var icon_statut = L.icon({
+  iconUrl: 'image_icon/statue-of-liberty.png',
+  // iconShadow:
+  iconSize:     [56, 56], // size of the icon
+  // shadowSize:   [50, 64], // size of the shadow
+  iconAnchor:   [25, 25], // point of the icon which will correspond to marker's location
+  // shadowAnchor: [4, 62],  // the same for the shadow
+  popupAnchor:  [-3, -20] // point from which the popup should open relative to the iconAnchor
 });
 // let marker_ams = L.marker([52.36674, 4.92621], {icon: icon_statut})
 // map.on('zoom', function(){
