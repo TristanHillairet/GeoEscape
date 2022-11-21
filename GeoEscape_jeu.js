@@ -18,6 +18,8 @@ L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
 
 var data = 'id='+1;
 
+// on va chercher les infos des objets de la base de donnée avec le fetch
+
 fetch('objets.php', {
   method: 'post',
   body: data,
@@ -31,25 +33,27 @@ fetch('objets.php', {
   let lon = r[0]['lon'];
   let zoom_min = r[0]['zoom_min'];
   let id = r[0]['id_objet'];
+
+  var layerGroup = new L.layerGroup();
+  layerGroup.addTo(map);
+  var mark = new L.Marker([lat,lon], {icon: icon_statut});
+  layerGroup.addLayer(mark);
+
   map.on('zoom', function(){
-    afficher_marker(lat,lon,zoom_min,id);
+    afficher_marker(mark,lat,lon,zoom_min,id);
   });
 })
 
-var layerGroup = new L.layerGroup();
-layerGroup.addTo(map);
 
-function afficher_marker(lat,lon,zoom_min,id){
-  var mark = new L.Marker([lat,lon], {icon: icon_statut});
-  // let layerGroup = L.layerGroup([mark]);
-  // layerGroup.addTo(map);
+
+function afficher_marker(mark,lat,lon,zoom_min,id){
   var zoom = map.getZoom();
-  console.log(zoom);
+  console.log(zoom, zoom_min);
   if (zoom > zoom_min){
-    layerGroup.addLayer(mark);
+    mark.setOpacity(1);
   } else {
-    console.log(lat)
-    layerGroup.removeLayer(mark);
+    mark.setOpacity(0);
+    console.log(mark)
   }
 }
 
