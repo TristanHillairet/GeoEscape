@@ -67,8 +67,7 @@ function afficher_marker(mark,lat,lon,zoom_min,id){
     iconAnchor:   [25, 25], // point of the icon which will correspond to marker's location
     // shadowAnchor: [4, 62],  // the same for the shadow
     popupAnchor:  [-3, -20] // point from which the popup should open relative to the iconAnchor
-})
-
+});
 // let marker_ams = L.marker([52.36674, 4.92621], {icon: icon_statut})
 // map.on('zoom', function(){
 //     var zoom = map.getZoom();
@@ -83,3 +82,29 @@ function afficher_marker(mark,lat,lon,zoom_min,id){
 
 
 // coord moulin d'amsterdam : 52.36674, 4.92621
+
+
+//                                  INVENTAIRE
+
+//Récupération d'un objet dans l'inventaire 
+
+var circle = L.circle([0, 0]);
+var click_lat = 0;
+var click_lon = 0;
+function onMapClick(e) {
+    //On get les coordonnées du click sur la carte
+    click_lat = e.latlng.lat;
+    click_lon = e.latlng.lng;
+    circle = L.circle([click_lat, click_lon], {radius: 10});
+    console.log('lat = '+click_lat+' lon = '+click_lon);
+}
+map.on('click',onMapClick);
+
+//  1.2- on vérifie que le click n'est pas à plus de 10 m d'un objet récupérable
+
+//  1.3- Si le click est à moins de 10m d'un objet on créer un élément dans la div inventaire pour y placer l'objet
+
+//2-Utilisation d'un objet dans l'inventaire
+// 2.1-On drag & drop l'objet sur la carte
+// 2.2-Si l'objet nécéssitant l'utilisation est affiché on enlève l'objet de l'inventaire
+// 2.3-On dévérouille l'objet débloquable
