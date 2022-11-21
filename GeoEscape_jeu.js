@@ -28,6 +28,12 @@ layerGroup_16.addTo(map);
 
 var data = 'id='+1;
 
+//on va remplir des listes de latitudes, longitudes, ... des objets avec leur id pour pouvoir les traiter par la suite 
+
+let lat = [];
+let lon = [];
+let zoom_min = [];
+
 // on va chercher les infos des objets de la base de donnée avec le fetch
 
 fetch('objets.php', {
@@ -40,14 +46,15 @@ fetch('objets.php', {
 .then(r => r.json())
 .then(r => {
   for(let i=0;i<12;i++){
-    let lat = r[i]['lat'];
-    let lon = r[i]['lon'];
-    let zoom_min = r[i]['zoom_min'];
     let id = r[i]['id_objet'];
-    let id_icone = r[i]['id_icone'];
+    lat.push([r[i]['lat'],id]);
+    lon.push([r[i]['lon'],id]);
+    zoom_m=r[i]['zoom_min'];
+    console.log(zoom_m);
+    //let id_icone = r[i]['id_icone'];
     let debut = r[i]['debut'];
 
-    if (debut == 1){
+    if (debut == 1){                      // on va creer les marqueurs dans des layergroupe en fonction de leur zoom_min 
       if (zoom_min == 10){
         creer_marker_10(lat,lon);
       } else if (zoom_min == 14){
@@ -64,6 +71,7 @@ fetch('objets.php', {
   }
 })
 
+console.log(lat);
 
 function creer_marker_10(lat,lon){
   var mark = new L.Marker([lat,lon], {icon: icon_statut});
