@@ -30,45 +30,78 @@ for (i=1;i<=12;i++){
   .then(r => {
     console.log(r);
     //for(let i=0;i<12;i++){
-    let id = r[i]['id_objet'];
-    let lat = r[i]['lat'];    let lon = r[i]['lon'];
-    zoom_m=r[i]['zoom_min'];
-    console.log(zoom_m);
-    let id_icone = r[i]['id_icone'];
-    let debut = r[i]['debut'];
-    if (open_status == true){
-    if (zoom_m == 10){
-      createMarker10(lat,lon,icone,popup,takable_status);/*cf création markers*/
-    } else if (zoom_m == 14){        createMarker14(lat,lon,icone,popup,takable_status);/*cf création markers*/
-    } else if (zoom_m == 16){
-      createMarker16(lat,lon,icone,popup,takable_status);/*cf création markers*/
-    }
-    }
-    map.on('zoom', function(){
-      console.log(map.getZoom());
-      console.log(layerGroup_10.getLayers())
-      afficher_marker(mark,zoom_min);
-    });
+    let id = r[0]['id_objet'];
+    let lat = r[0]['lat'];    
+    let lon = r[0]['lon'];
+    let zoom_m=r[0]['zoom_min'];
+    let icone = r[0]['url'];
+    let popup = r[0]['popup'];
+    let takable =r[0]['open_status'];
+    console.log(takable);
+    //if (open_status == true){
+    initialisation(lat,lon,zoom_m,icone,popup,takable)
+    //}
+    // map.on('zoom', function(){
+    //   console.log(map.getZoom());
+    //   console.log(layerGroup_10.getLayers())
+    //   afficher_marker(mark,zoom_min);
+    // });
     //}
   })
 }
 
+
+// initialisation des layers
+
+let layergroup_10 = L.layerGroup();
+layergroup_10.addTo(map);  
+
+let layergroup_14 = L.layerGroup();
+layergroup_14.addTo(map); 
+
+let layergroup_16 = L.layerGroup();
+layergroup_16.addTo(map); 
+
+// fonction d'initialisation
+
+function initialisation(lat,lon,zoom_m,icone,popup,takable_status){
+  if (zoom_m == 10){
+    createMarker10(lat,lon,icone,popup,takable_status);/*cf création markers*/
+  } else if (zoom_m == 14){        
+    createMarker14(lat,lon,icone,popup,takable_status);/*cf création markers*/
+  } else if (zoom_m == 16){
+    createMarker16(lat,lon,icone,popup,takable_status);/*cf création markers*/
+  }
+}
+
 //Création d'un marker de niveau de zoom minimum 10
 function createMarker10(lat,lon,icone,popup,takable_status){
+  var img = L.icon({
+    iconUrl: icone,
+    iconSize: [56, 56],
+    iconAnchor: [25,25],
+    popupAnchor: [-3, -20]
+  });
   var marker = new L.Marker([lat,lon], {
-              icon: icon_statut,/*Transfert de l'icone de l'objet au marker*/
-              isTakable: takable_status,/*Transfert du status de prenabilité au marker*/
+              icon: img,/*Transfert de l'icone de l'objet au marker*/
+              //isTakable: takable_status,/*Transfert du status de prenabilité au marker*/
               opacity: 0.0/*Par défaut le marker n'est pas visible*/
-             });
+             })
   marker.bindPopup(popup);
   layergroup_10.addLayer(marker);/*Ajout du marker au layer10*/
 }
 
 //Création d'un marker de niveau de zoom minimum 14
 function createMarker14(lat,lon,icone,popup,takable_status){
+  var img = L.icon({
+    iconUrl: icone,
+    iconSize: [56, 56],
+    iconAnchor: [25,25],
+    popupAnchor: [-3, -20]
+  });
   var marker = new L.Marker([lat,lon], {
-              icon: icone,/*Transfert de l'icone de l'objet au marker*/
-              isTakable: takable_status,/*Transfert du status de prenabilité au marker*/
+              icon: img,/*Transfert de l'icone de l'objet au marker*/
+              //isTakable: takable_status,/*Transfert du status de prenabilité au marker*/
               opacity: 0.0/*Par défaut le marker n'est pas visible*/
             });
   marker.bindPopup(popup);
@@ -77,16 +110,113 @@ function createMarker14(lat,lon,icone,popup,takable_status){
 
 //Création d'un marker de niveau de zoom minimum 16
 function createMarker16(lat,lon,icone,popup,takable_status){
+  var img = L.icon({
+    iconUrl: icone,
+    iconSize: [56, 56],
+    iconAnchor: [25,25],
+    popupAnchor: [-3, -20]
+  });
   var marker = new L.Marker([lat,lon], {
-              icon: icone,/*Transfert de l'icone de l'objet au marker*/
-              isTakable: takable_status,/*Transfert du status de prenabilité au marker*/
+              icon: img,/*Transfert de l'icone de l'objet au marker*/
+              //isTakable: takable_status,/*Transfert du status de prenabilité au marker*/
               opacity: 0.0/*Par défaut le marker n'est pas visible*/
-            });
+            })
   marker.bindPopup(popup);
   layergroup_16.addLayer(marker);/*Ajout du marker au layer16*/
 }
 
 //Affichage des markers de niveau de zoom correspondant
+
+map.on('zoom',function(){
+  var zoom = map.getZoom();
+  console.log(zoom);
+  // list_10 = layergroup_10.getLayers();
+  // list_14 = layergroup_14.getLayers();
+  // list_16 = layergroup_16.getLayers();
+  // l10 = list_10.length;
+  // l14 = list_14.length;
+  // l16 = list_16.length;
+  if (zoom => 16){
+    console.log(zoom);
+    // for (i=0;i<l10;i++){
+    //   list_10[i].setOpacity(1.0);
+    // }
+    // for (i=0;i<l14;i++){
+    //   list_14[i].setOpacity(1.0);
+    // }
+    // for (i=0;i<l16;i++){
+    //   list_16[i].setOpacity(1.0);
+    // }
+    layergroup_10.eachLayer(function(layer){
+      layer.setOpacity(1);
+    });
+    layergroup_14.eachLayer(function(layer){
+      layer.setOpacity(1);
+    });
+    layergroup_16.eachLayer(function(layer){
+      layer.setOpacity(1);
+    });
+  } else if (zoom => 14 && zoom < 16){
+  //   for (i=0;i<l10;i++){
+  //     list_10[i].setOpacity(1.0);
+  //   }
+  //   for (i=0;i<l14;i++){
+  //     list_14[i].setOpacity(1.0);
+  //   }
+  //   for (i=0;i<l16;i++){
+  //     list_16[i].setOpacity(0.0);
+  //   }
+  layergroup_10.eachLayer(function(layer){
+    layer.setOpacity(1);
+  });
+  layergroup_14.eachLayer(function(layer){
+    layer.setOpacity(1);
+  });
+  layergroup_16.eachLayer(function(layer){
+    layer.setOpacity(0);
+  });
+  } else if (zoom => 10 && zoom < 14){
+    // for (i=0;i<l10;i++){
+    //   list_10[i].setOpacity(1.0);
+    // }
+    // for (i=0;i<l14;i++){
+    //   list_14[i].setOpacity(0.0);
+    // }
+    // for (i=0;i<l16;i++){
+    //   list_16[i].setOpacity(0.0);
+    // }
+    layergroup_10.eachLayer(function(layer){
+      layer.setOpacity(1);
+    });
+    layergroup_14.eachLayer(function(layer){
+      layer.setOpacity(0);
+    });
+    layergroup_16.eachLayer(function(layer){
+      layer.setOpacity(0);
+    });
+  } else { 
+    // for (i=0;i<l10;i++){
+    //   list_10[i].setOpacity(0.0);
+    // }
+    // for (i=0;i<l14;i++){
+    //   list_14[i].setOpacity(0.0);
+    // }
+    // for (i=0;i<l16;i++){
+    //   list_16[i].setOpacity(0.0);
+    // }
+    layergroup_10.eachLayer(function(layer){
+      layer.setOpacity(0);
+    });
+    layergroup_14.eachLayer(function(layer){
+      layer.setOpacity(0);
+    });
+    layergroup_16.eachLayer(function(layer){
+      layer.setOpacity(0);
+    });
+  }
+  console.log(layergroup_10.getLayers());
+})
+
 function printMarker(marker,zoom){
   var zmap = map.getZoom();/*Récupère le zoom actuel de la carte*/
   if (zmap > zoom){
@@ -110,15 +240,7 @@ function printMarker(marker,zoom){
 //       alert("Objet non récupérable");
 //   }
 // });
-
-/*UTILISATIOIN D'UN OBJET DE L'INVENTAIRE*/
-
-/*DEBLOQUER UN OBJET*/
-
-/*CHRONOMETRE*/
-
 /*
-
 var icon_statut = L.icon({
   iconUrl: 'image_icon/statue-of-liberty.png',
   // iconShadow:
@@ -128,6 +250,15 @@ var icon_statut = L.icon({
   // shadowAnchor: [4, 62],  // the same for the shadow
   popupAnchor:  [-3, -20] // point from which the popup should open relative to the iconAnchor
 });
-
-
 */
+
+/*UTILISATIOIN D'UN OBJET DE L'INVENTAIRE*/
+
+/*DEBLOQUER UN OBJET*/
+
+/*CHRONOMETRE*/
+
+
+
+
+
