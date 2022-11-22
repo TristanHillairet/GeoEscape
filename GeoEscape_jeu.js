@@ -49,7 +49,7 @@ fetch('objets.php', {
     let id = r[i]['id_objet'];
     lat.push([r[i]['lat'],id]);
     lon.push([r[i]['lon'],id]);
-    zoom_m=r[i]['zoom_min'];
+    let zoom_m=r[i]['zoom_min'];
     console.log(zoom_m);
     //let id_icone = r[i]['id_icone'];
     let debut = r[i]['debut'];
@@ -66,9 +66,30 @@ fetch('objets.php', {
     map.on('zoom', function(){
       console.log(map.getZoom());
       console.log(layerGroup_10.getLayers())
-      afficher_marker(mark,zoom_min);
+     // afficher_marker(mark,zoom_min);
     });
   }
+})
+
+
+map.on('zoom', function(){
+  fetch('objets.php',{
+    method: 'post',
+    body: data,
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded'
+    }
+  })
+  .then(r => r.json())
+  .then(r => {
+    for(let i=0;i<12;i++){
+      let id = r[i]['id_objet'];
+      let zoom_m=r[i]['zoom_min'];
+      if (zoom_m==10){
+        
+      }
+    }
+  })
 })
 
 console.log(lat);

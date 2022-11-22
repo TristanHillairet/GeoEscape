@@ -8,7 +8,7 @@ if (!$link) {
     die('Erreur de connexion');
   } 
 
-$data=$_POST['id'];  
+$data=$_POST['data'];  
 $result = mysqli_query($link, "SELECT * FROM objet");
 $resultat = [];
 
