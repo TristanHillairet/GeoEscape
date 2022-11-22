@@ -15,43 +15,43 @@ L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
 
 /*RECHERCHE DANS LA BDD*/
 
-var data = 'id='+1;
-fetch('objets.php', {
-  method: 'post',
-  body: data,
-  headers: {
-    'Content-Type': 'application/x-www-form-urlencoded'
-  }
-})
-.then(r => r.json())
-.then(r => {
-  for(let i=0;i<12;i++){
+
+for (i=1;i<=12;i++){
+
+  var id = 'id='+i;
+  fetch('objets.php', {
+    method: 'post',
+    body: id,
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded'
+    }
+  })
+  .then(r => r.json())
+  .then(r => {
+    console.log(r);
+    //for(let i=0;i<12;i++){
     let id = r[i]['id_objet'];
-    lat.push([r[i]['lat'],id]);
-    lon.push([r[i]['lon'],id]);
+    let lat = r[i]['lat'];    let lon = r[i]['lon'];
     zoom_m=r[i]['zoom_min'];
     console.log(zoom_m);
-    //let id_icone = r[i]['id_icone'];
+    let id_icone = r[i]['id_icone'];
     let debut = r[i]['debut'];
-
     if (open_status == true){
-      if (zoom_m == 10){
-        createMarker10(lat,lon,icone,popup,takable_status);/*cf création markers*/
-      } else if (zoom_m == 14){
-        createMarker14(lat,lon,icone,popup,takable_status);/*cf création markers*/
-      } else if (zoom_m == 16){
-        createMarker16(lat,lon,icone,popup,takable_status);/*cf création markers*/
-      }
+    if (zoom_m == 10){
+      createMarker10(lat,lon,icone,popup,takable_status);/*cf création markers*/
+    } else if (zoom_m == 14){        createMarker14(lat,lon,icone,popup,takable_status);/*cf création markers*/
+    } else if (zoom_m == 16){
+      createMarker16(lat,lon,icone,popup,takable_status);/*cf création markers*/
+    }
     }
     map.on('zoom', function(){
       console.log(map.getZoom());
       console.log(layerGroup_10.getLayers())
       afficher_marker(mark,zoom_min);
     });
-  }
-})
-
-console.log(lat);
+    //}
+  })
+}
 
 //Création d'un marker de niveau de zoom minimum 10
 function createMarker10(lat,lon,icone,popup,takable_status){
@@ -95,19 +95,21 @@ function printMarker(marker,zoom){
 }
 
 //Evenement quand la souris passe dessus un marqueur
-marker.on('mouseover',function(e){
-  marker.openPopup();/*Ouverture du Popup du marker*/
-});
+
+// marker.on('mouseover',function(e){
+//   marker.openPopup();/*Ouverture du Popup du marker*/
+// });
 
 //Evenement de clic sur un marqueur
-marker.on('click',function(e){
-  if (marker.isTakable == true){
-      /*RECUPERATION DE L'OBJET DANS L'INVENTAIRE*/
-  }
-  else {
-      alert("Objet non récupérable");
-  }
-});
+
+// marker.on('click',function(e){
+//   if (marker.isTakable == true){
+//       /*RECUPERATION DE L'OBJET DANS L'INVENTAIRE*/
+//   }
+//   else {
+//       alert("Objet non récupérable");
+//   }
+// });
 
 /*UTILISATIOIN D'UN OBJET DE L'INVENTAIRE*/
 
