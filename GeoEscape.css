@@ -1,3 +1,9 @@
+/*                       GEOESCAPE.CSS                  */
+/* L.WECKER et T.HILLAIRET                              */
+/* 11/2022                                              */
+/* Définition du fichier                                */
+
+/*CSS Global*/
 body {
     background-color: #111111;
     margin: 0;
@@ -13,6 +19,8 @@ header{
     text-align: center;
     grid-column: 1/ span 2;
 }
+
+/*CSS Acceuil*/
 #description{
     color: white;
     font-family: 'Aldrich', sans-serif;
@@ -39,6 +47,7 @@ header{
     font-family: 'Aldrich', sans-serif;
 }
 
+/*CSS JEU*/
 #map {
     height: 600px;
     width: 1300px;
