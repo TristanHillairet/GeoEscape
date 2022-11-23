@@ -28,7 +28,6 @@ for (i=1;i<=12;i++){
   })
   .then(r => r.json())
   .then(r => {
-    console.log(r);
     //for(let i=0;i<12;i++){
     let id = r[0]['id_objet'];
     let lat = r[0]['lat'];    
@@ -36,17 +35,11 @@ for (i=1;i<=12;i++){
     let zoom_m=r[0]['zoom_min'];
     let icone = r[0]['url'];
     let popup = r[0]['popup'];
-    let takable =r[0]['open_status'];
-    console.log(takable);
-    //if (open_status == true){
-    initialisation(lat,lon,zoom_m,icone,popup,takable)
-    //}
-    // map.on('zoom', function(){
-    //   console.log(map.getZoom());
-    //   console.log(layerGroup_10.getLayers())
-    //   afficher_marker(mark,zoom_min);
-    // });
-    //}
+    let takable =r[0]['takable'];
+    let debut = r[0]['debut'];
+    if (debut == 1){
+      initialisation(lat,lon,zoom_m,icone,popup,takable)
+    }
   })
 }
 
@@ -84,10 +77,11 @@ function createMarker10(lat,lon,icone,popup,takable_status){
   });
   var marker = new L.Marker([lat,lon], {
               icon: img,/*Transfert de l'icone de l'objet au marker*/
-              //isTakable: takable_status,/*Transfert du status de prenabilité au marker*/
+              isTakable: takable_status,/*Transfert du status de prenabilité au marker*/
              })
   marker.bindPopup(popup);
   layergroup_10.addLayer(marker);/*Ajout du marker au layer10*/
+  marker.on('click',recup);
 }
 
 //Création d'un marker de niveau de zoom minimum 14
@@ -100,10 +94,11 @@ function createMarker14(lat,lon,icone,popup,takable_status){
   });
   var marker = new L.Marker([lat,lon], {
               icon: img,/*Transfert de l'icone de l'objet au marker*/
-              //isTakable: takable_status,/*Transfert du status de prenabilité au marker*/
+              isTakable: takable_status,/*Transfert du status de prenabilité au marker*/
             });
   marker.bindPopup(popup);
   layergroup_14.addLayer(marker);/*Ajout du marker au layer14*/
+  marker.on('click',recup);
 }
 
 //Création d'un marker de niveau de zoom minimum 16
@@ -116,10 +111,11 @@ function createMarker16(lat,lon,icone,popup,takable_status){
   });
   var marker = new L.Marker([lat,lon], {
               icon: img,/*Transfert de l'icone de l'objet au marker*/
-              //isTakable: takable_status,/*Transfert du status de prenabilité au marker*/
+              isTakable: takable_status,/*Transfert du status de prenabilité au marker*/
             })
   marker.bindPopup(popup);
   layergroup_16.addLayer(marker);/*Ajout du marker au layer16*/
+  marker.on('click',recup)
 }
 
 //Affichage des markers de niveau de zoom correspondant
@@ -142,16 +138,10 @@ map.on('zoom',function(){
   if (zoom >=10){
     map.addLayer(layergroup_10);
   } else {
-    map.removeLayer(layergroup_10)
+    map.removeLayer(layergroup_10);
   }
 })
 
-function printMarker(marker,zoom){
-  var zmap = map.getZoom();/*Récupère le zoom actuel de la carte*/
-  if (zmap > zoom){
-    marker.setOpacity(1.0);/*Si le zoom de la map est supérieur au zoom minimum de l'objet il s'affiche*/
-  }
-}
 
 //Evenement quand la souris passe dessus un marqueur
 
@@ -159,27 +149,21 @@ function printMarker(marker,zoom){
 //   marker.openPopup();/*Ouverture du Popup du marker*/
 // });
 
+
 //Evenement de clic sur un marqueur
 
-// marker.on('click',function(e){
-//   if (marker.isTakable == true){
-//       /*RECUPERATION DE L'OBJET DANS L'INVENTAIRE*/
-//   }
-//   else {
-//       alert("Objet non récupérable");
-//   }
-// });
-/*
-var icon_statut = L.icon({
-  iconUrl: 'image_icon/statue-of-liberty.png',
-  // iconShadow:
-  iconSize:     [56, 56], // size of the icon
-  // shadowSize:   [50, 64], // size of the shadow
-  iconAnchor:   [25, 25], // point of the icon which will correspond to marker's location
-  // shadowAnchor: [4, 62],  // the same for the shadow
-  popupAnchor:  [-3, -20] // point from which the popup should open relative to the iconAnchor
-});
-*/
+
+//     /*RECUPERATION DE L'OBJET SUR LA CARTE POUR L'INVENTAIRE*/
+
+let inventaire = [];
+function recup(e){
+  console.log(e);
+  if (e.target.option.isTakable == 1){
+    e.addTo(inventaire);
+  } else {
+    alert("Objet non récupérable");
+  }
+};
 
 /*UTILISATIOIN D'UN OBJET DE L'INVENTAIRE*/
 
