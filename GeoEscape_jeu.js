@@ -156,12 +156,16 @@ function recup(e){
   if (e.target.options.isTakable== 1){
     inventaire.push(e);
     e.target.remove();
+    var url_icone = e.target.options.icon.options.iconUrl;
+    var div_img = document.getElementById("image");
+    div_img.style.widht='200px';
+    div_img.style.height='200px';
+    div_img.src=url_icone;
   } else {
     alert("Objet non récupérable");
   }
   console.log(inventaire);
 };
-
 
 
 /*UTILISATIOIN D'UN OBJET DE L'INVENTAIRE*/

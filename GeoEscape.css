@@ -20,6 +20,8 @@ header{
     grid-column: 1/ span 2;
 }
 
+
+
 /*CSS Acceuil*/
 #description{
     color: white;
@@ -50,10 +52,14 @@ header{
 /*CSS JEU*/
 #map {
     height: 600px;
-    width: 1300px;
+    width: 1000px;
     margin: 100px;
 }
 
-#inventaire {
-    color:rgb(255, 255, 255);
+.fenetre{
+    background-color: aliceblue;
+    height: 200px;
+    width: 200px;
+    margin-right : 10px;
 }
+
