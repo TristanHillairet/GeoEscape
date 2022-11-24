@@ -145,12 +145,7 @@ map.on('zoom',function(){
 
 //Evenement quand la souris passe dessus un marqueur
 
-// marker.on('mouseover',function(e){
-//   marker.openPopup();/*Ouverture du Popup du marker*/
-// });
 
-
-//Evenement de clic sur un marqueur
 
 
 //     /*RECUPERATION DE L'OBJET SUR LA CARTE POUR L'INVENTAIRE*/
@@ -158,12 +153,16 @@ map.on('zoom',function(){
 let inventaire = [];
 function recup(e){
   console.log(e);
-  if (e.target.option.isTakable == 1){
-    e.addTo(inventaire);
+  if (e.target.options.isTakable== 1){
+    inventaire.push(e);
+    e.target.remove();
   } else {
     alert("Objet non récupérable");
   }
+  console.log(inventaire);
 };
+
+
 
 /*UTILISATIOIN D'UN OBJET DE L'INVENTAIRE*/
 
