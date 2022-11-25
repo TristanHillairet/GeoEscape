@@ -38,6 +38,8 @@ for (i=1;i<=12;i++){
     let debut = r[0]['debut'];
     if (debut == 1){
       initialisation(lat,lon,zoom_m,icone,popup,takable)
+    } else {
+      bloque(lat,lon,zoom_m,icone,popup,takable)
     }
   })
 }
@@ -186,8 +188,24 @@ function recup(e){
 //test
 /*DEBLOQUER UN OBJET BLOQUE PAR CODE*/
 
-function debloc_code(){
-  
+function bloque(lat,lon,zoom_m,icone,popup,takable){
+  var img = L.icon({
+    iconUrl: icone,
+    iconSize: [56, 56],
+    iconAnchor: [25,25],
+    popupAnchor: [-3, -20]
+  });
+  var marker = new L.Marker([lat,lon], {
+              icon: img,/*Transfert de l'icone de l'objet au marker*/
+              isTakable: takable_status,/*Transfert du status de prenabilité au marker*/
+             })
+  marker.bindPopup(popup);marker.bindPopup(popup);
+  marker.on('mouseover', function (e) {
+    this.openPopup();
+  });
+  marker.on('mouseout', function (e) {
+    this.closePopup();
+  });
 }
 
 /*CHRONOMETRE*/
