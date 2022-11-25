@@ -2,16 +2,7 @@
 
 <?php
 
-/* CONNEXION AU LIEN */
-
-$link = mysqli_connect('localhost', 'root', 'root', 'objet_geoescape');
-mysqli_set_charset($link, "utf8");
-
-/* CATCH ERREUR DE CONNEXION */
-
-if (!$link) {
-  die('Erreur de connexion');/*Renvoie une erreur de connexion*/
-} 
+include('connect.php');
 
 /* RECUPERATION DES OBJETS */
 
