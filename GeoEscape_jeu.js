@@ -166,7 +166,7 @@ function recup(e){
     inventaire.push(e);
     e.target.remove();
     var url_icone = e.target.options.icon.options.iconUrl;
-    var div_img = document.getElementById("image");
+    var div_img = document.getElementById("image_1");
     div_img.style.widht='200px';
     div_img.style.height='200px';
     div_img.src=url_icone;

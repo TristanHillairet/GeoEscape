@@ -2,7 +2,7 @@
 
 <?php
 
-include('connect.php');
+include('connect.php')
 
 /* RECUPERATION DES OBJETS */
 
