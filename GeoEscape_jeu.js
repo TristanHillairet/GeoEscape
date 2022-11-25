@@ -169,7 +169,9 @@ function recup(e){
 
 
 
-/*DEBLOQUER UN OBJET*/
+/*DEBLOQUER UN OBJET BLOQUE PAR CODE*/
+
+
 
 /*CHRONOMETRE*/
 
