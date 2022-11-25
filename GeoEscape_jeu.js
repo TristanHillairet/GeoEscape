@@ -27,7 +27,7 @@ for (i=1;i<=12;i++){
     }
   })
   .then(r => r.json())
-  .then(r => {
+  .then(r => { console.log(r)
     let id = r[0]['id_objet'];
     let lat = r[0]['lat'];    
     let lon = r[0]['lon'];
