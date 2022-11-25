@@ -76,7 +76,13 @@ function createMarker10(lat,lon,icone,popup,takable_status){
   marker.bindPopup(popup);
   layergroup_10.addLayer(marker);/*Ajout du marker au layer10*/
   marker.on('click',recup);
-  //marker.on('mouseover',printPopup);
+  marker.bindPopup(popup);
+  marker.on('mouseover', function (e) {
+    this.openPopup();
+  });
+  marker.on('mouseout', function (e) {
+    this.closePopup();
+  });
 }
 
 //Création d'un marker de niveau de zoom minimum 14
@@ -94,7 +100,13 @@ function createMarker14(lat,lon,icone,popup,takable_status){
   marker.bindPopup(popup);
   layergroup_14.addLayer(marker);/*Ajout du marker au layer14*/
   marker.on('click',recup);
-  //marker.on('mouseover',printPopup)
+  marker.bindPopup(popup);
+  marker.on('mouseover', function (e) {
+    this.openPopup();
+  });
+  marker.on('mouseout', function (e) {
+    this.closePopup();
+  });
 }
 
 //Création d'un marker de niveau de zoom minimum 16
@@ -112,7 +124,13 @@ function createMarker16(lat,lon,icone,popup,takable_status){
   marker.bindPopup(popup);
   layergroup_16.addLayer(marker);/*Ajout du marker au layer16*/
   marker.on('click',recup)
-  //marker.on('mouseover',printPopup)
+  marker.bindPopup(popup);
+  marker.on('mouseover', function (e) {
+    this.openPopup();
+  });
+  marker.on('mouseout', function (e) {
+    this.closePopup();
+  });
 }
 
 //Affichage des markers de niveau de zoom correspondant
@@ -138,12 +156,6 @@ map.on('zoom',function(){
     map.removeLayer(layergroup_10);
   }
 })
-
-
-//Evenement quand la souris passe dessus un marqueur
-
-
-
 
 //     /*RECUPERATION DE L'OBJET SUR LA CARTE POUR L'INVENTAIRE*/
 
