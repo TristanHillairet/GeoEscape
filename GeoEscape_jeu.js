@@ -177,6 +177,7 @@ function recup(e){
 };
 
 
+
 /*UTILISATIOIN D'UN OBJET DE L'INVENTAIRE*/
 
 
@@ -184,6 +185,10 @@ function recup(e){
 /*DEBLOQUER UN OBJET*/
 //test
 /*DEBLOQUER UN OBJET BLOQUE PAR CODE*/
+
+function debloc_code(){
+  
+}
 
 /*CHRONOMETRE*/
 
