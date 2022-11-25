@@ -28,7 +28,6 @@ for (i=1;i<=12;i++){
   })
   .then(r => r.json())
   .then(r => {
-    //for(let i=0;i<12;i++){
     let id = r[0]['id_objet'];
     let lat = r[0]['lat'];    
     let lon = r[0]['lon'];
@@ -47,13 +46,8 @@ for (i=1;i<=12;i++){
 // initialisation des layers
 
 let layergroup_10 = L.layerGroup();
-//layergroup_10.addTo(map);  
-
 let layergroup_14 = L.layerGroup();
-//layergroup_14.addTo(map); 
-
-let layergroup_16 = L.layerGroup();
-//layergroup_16.addTo(map); 
+let layergroup_16 = L.layerGroup(); 
 
 // fonction d'initialisation
 
@@ -82,6 +76,7 @@ function createMarker10(lat,lon,icone,popup,takable_status){
   marker.bindPopup(popup);
   layergroup_10.addLayer(marker);/*Ajout du marker au layer10*/
   marker.on('click',recup);
+  //marker.on('mouseover',printPopup);
 }
 
 //Création d'un marker de niveau de zoom minimum 14
@@ -99,6 +94,7 @@ function createMarker14(lat,lon,icone,popup,takable_status){
   marker.bindPopup(popup);
   layergroup_14.addLayer(marker);/*Ajout du marker au layer14*/
   marker.on('click',recup);
+  //marker.on('mouseover',printPopup)
 }
 
 //Création d'un marker de niveau de zoom minimum 16
@@ -116,6 +112,7 @@ function createMarker16(lat,lon,icone,popup,takable_status){
   marker.bindPopup(popup);
   layergroup_16.addLayer(marker);/*Ajout du marker au layer16*/
   marker.on('click',recup)
+  //marker.on('mouseover',printPopup)
 }
 
 //Affichage des markers de niveau de zoom correspondant
