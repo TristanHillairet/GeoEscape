@@ -183,6 +183,8 @@ function recup(e){
 
 /*DEBLOQUER UN OBJET*/
 //test
+/*DEBLOQUER UN OBJET BLOQUE PAR CODE*/
+
 /*CHRONOMETRE*/
 
 
