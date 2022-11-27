@@ -2,9 +2,8 @@
 
 <?php
 
+include("connect.php");
 
-$link = mysqli_connect('localhost', 'root', 'root', 'objet_geoescape');
-mysqli_set_charset($link, "utf8");
 /* RECUPERATION DES OBJETS */
 
 $id=$_POST['id'];  
@@ -21,13 +20,6 @@ $objets = [];
 $icone = mysqli_query($link, $icone_query);
 $icones = [];
 
-
-/* RECUPERATION DES ICONES */
-
-
-
-// $id_icone=$_POST['id_icone'];
-// $icone = mysqli_query($link, "SELECT * FROM icone WHERE id_icone = $id_icone")
 
 /* TRANSFROMATION EN JSON */
 

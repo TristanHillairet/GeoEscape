@@ -6,7 +6,7 @@
 
 /*AFFICHAGE DE LA CARTE*/
 
-let paris = [48.857527, 2.351466];/*Point de départ*/
+let paris = [52.36674, 4.92621];/*Point de départ*/
 let map = L.map('map').setView(paris, 13);/*Initialisation de la carte au point de départ*/
 
 L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -27,19 +27,19 @@ for (i=1;i<=12;i++){
     }
   })
   .then(r => r.json())
-  .then(r => { console.log(r)
+  .then(r => { 
     let id = r[0]['id_objet'];
     let lat = r[0]['lat'];    
     let lon = r[0]['lon'];
     let zoom_m=r[0]['zoom_min'];
     let icone = r[0]['url'];
     let popup = r[0]['popup'];
-    let takable =r[0]['takable'];
     let debut = r[0]['debut'];
+    let type = r[0]['type'];  //si 1 : récupérable ; si 2 : bloqué par code ; 3 :bloqué par objet ; 4: aucun des 3 
     if (debut == 1){
-      initialisation(lat,lon,zoom_m,icone,popup,takable)
+      initialisation(lat,lon,zoom_m,icone,popup,type,id);
     } else {
-      bloque(lat,lon,zoom_m,icone,popup,takable)
+      bloque(lat,lon,zoom_m,icone,popup,type,id);
     }
   })
 }
@@ -53,18 +53,18 @@ let layergroup_16 = L.layerGroup();
 
 // fonction d'initialisation
 
-function initialisation(lat,lon,zoom_m,icone,popup,takable_status){
+function initialisation(lat,lon,zoom_m,icone,popup,type,id){
   if (zoom_m == 10){
-    createMarker10(lat,lon,icone,popup,takable_status);/*cf création markers*/
+    createMarker10(lat,lon,icone,popup,type,id);/*cf création markers*/
   } else if (zoom_m == 14){        
-    createMarker14(lat,lon,icone,popup,takable_status);/*cf création markers*/
+    createMarker14(lat,lon,icone,popup,type,id);/*cf création markers*/
   } else if (zoom_m == 16){
-    createMarker16(lat,lon,icone,popup,takable_status);/*cf création markers*/
+    createMarker16(lat,lon,icone,popup,type,id);/*cf création markers*/
   }
 }
 
 //Création d'un marker de niveau de zoom minimum 10
-function createMarker10(lat,lon,icone,popup,takable_status){
+function createMarker10(lat,lon,icone,popup,type,id){
   var img = L.icon({
     iconUrl: icone,
     iconSize: [56, 56],
@@ -73,11 +73,12 @@ function createMarker10(lat,lon,icone,popup,takable_status){
   });
   var marker = new L.Marker([lat,lon], {
               icon: img,/*Transfert de l'icone de l'objet au marker*/
-              isTakable: takable_status,/*Transfert du status de prenabilité au marker*/
+              type_objet:type,/*Transfert du status de prenabilité au marker*/
+              id_objet:id
              })
   marker.bindPopup(popup);
   layergroup_10.addLayer(marker);/*Ajout du marker au layer10*/
-  marker.on('click',recup);
+  marker.on('click',recherche_type);
   marker.bindPopup(popup);
   marker.on('mouseover', function (e) {
     this.openPopup();
@@ -88,7 +89,7 @@ function createMarker10(lat,lon,icone,popup,takable_status){
 }
 
 //Création d'un marker de niveau de zoom minimum 14
-function createMarker14(lat,lon,icone,popup,takable_status){
+function createMarker14(lat,lon,icone,popup,type,id){
   var img = L.icon({
     iconUrl: icone,
     iconSize: [56, 56],
@@ -97,11 +98,12 @@ function createMarker14(lat,lon,icone,popup,takable_status){
   });
   var marker = new L.Marker([lat,lon], {
               icon: img,/*Transfert de l'icone de l'objet au marker*/
-              isTakable: takable_status,/*Transfert du status de prenabilité au marker*/
+              type_objet: type,/*Transfert du status de prenabilité au marker*/
+              id_objet:id
             });
   marker.bindPopup(popup);
   layergroup_14.addLayer(marker);/*Ajout du marker au layer14*/
-  marker.on('click',recup);
+  marker.on('click',recherche_type);
   marker.bindPopup(popup);
   marker.on('mouseover', function (e) {
     this.openPopup();
@@ -112,7 +114,7 @@ function createMarker14(lat,lon,icone,popup,takable_status){
 }
 
 //Création d'un marker de niveau de zoom minimum 16
-function createMarker16(lat,lon,icone,popup,takable_status){
+function createMarker16(lat,lon,icone,popup,type,id){
   var img = L.icon({
     iconUrl: icone,
     iconSize: [56, 56],
@@ -121,11 +123,12 @@ function createMarker16(lat,lon,icone,popup,takable_status){
   });
   var marker = new L.Marker([lat,lon], {
               icon: img,/*Transfert de l'icone de l'objet au marker*/
-              isTakable: takable_status,/*Transfert du status de prenabilité au marker*/
+              type_objet: type,/*Transfert du status de prenabilité au marker*/
+              id_objet: id
             })
   marker.bindPopup(popup);
   layergroup_16.addLayer(marker);/*Ajout du marker au layer16*/
-  marker.on('click',recup)
+  marker.on('click',recherche_type)
   marker.bindPopup(popup);
   marker.on('mouseover', function (e) {
     this.openPopup();
@@ -159,25 +162,33 @@ map.on('zoom',function(){
   }
 })
 
+
+function recherche_type(e){
+  var typ = e.target.options.type_objet;
+  if (typ == 1){
+    recup(e);
+  } else if (typ == 2){
+    debloque_code(e);
+  } else if (typ == 3){
+    debloque_objet(e);
+  } else {
+    alert("objet non récupérable");
+  }
+}
+
+
 //     /*RECUPERATION DE L'OBJET SUR LA CARTE POUR L'INVENTAIRE*/
 
 let inventaire = [];
 function recup(e){
-  console.log(e);
-  if (e.target.options.isTakable== 1){
-    inventaire.push(e);
-    e.target.remove();
-    var url_icone = e.target.options.icon.options.iconUrl;
-    var div_img = document.getElementById("image_1");
-    div_img.style.widht='200px';
-    div_img.style.height='200px';
-    div_img.src=url_icone;
-  } else {
-    alert("Objet non récupérable");
-  }
-  console.log(inventaire);
+  inventaire.push(e);
+  e.target.remove();
+  var url_icone = e.target.options.icon.options.iconUrl;
+  var div_img = document.getElementById("image_1");
+  div_img.style.widht='200px';
+  div_img.style.height='200px';
+  div_img.src=url_icone;
 };
-
 
 
 /*UTILISATIOIN D'UN OBJET DE L'INVENTAIRE*/
@@ -188,7 +199,7 @@ function recup(e){
 //test
 /*DEBLOQUER UN OBJET BLOQUE PAR CODE*/
 
-function bloque(lat,lon,zoom_m,icone,popup,takable){
+function bloque(lat,lon,zoom_m,icone,popup,type,id){
   var img = L.icon({
     iconUrl: icone,
     iconSize: [56, 56],
@@ -197,15 +208,30 @@ function bloque(lat,lon,zoom_m,icone,popup,takable){
   });
   var marker = new L.Marker([lat,lon], {
               icon: img,/*Transfert de l'icone de l'objet au marker*/
-              isTakable: takable_status,/*Transfert du status de prenabilité au marker*/
+              type_objet: type,/*Transfert du status de prenabilité au marker*/
+              id_objet:id,
+              zoom_min:zoom_m,
              })
-  marker.bindPopup(popup);marker.bindPopup(popup);
+  marker.bindPopup(popup);
   marker.on('mouseover', function (e) {
     this.openPopup();
   });
   marker.on('mouseout', function (e) {
     this.closePopup();
   });
+}
+
+function debloque_code(e){
+  var id_obj = e.target.options.id_objet; 
+  fetch('objets_bloque_code.php', {
+    method: 'post',
+    body: id_obj,
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded'
+    }
+  })
+  .then(r => r.json())
+  .then(console.log(r))
 }
 
 /*CHRONOMETRE*/
