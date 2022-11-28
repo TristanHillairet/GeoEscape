@@ -196,34 +196,13 @@ function recup(e){
 
 
 /*DEBLOQUER UN OBJET*/
-//test
+
 /*DEBLOQUER UN OBJET BLOQUE PAR CODE*/
 
-function bloque(lat,lon,zoom_m,icone,popup,type,id){
-  var img = L.icon({
-    iconUrl: icone,
-    iconSize: [56, 56],
-    iconAnchor: [25,25],
-    popupAnchor: [-3, -20]
-  });
-  var marker = new L.Marker([lat,lon], {
-              icon: img,/*Transfert de l'icone de l'objet au marker*/
-              type_objet: type,/*Transfert du status de prenabilité au marker*/
-              id_objet:id,
-              zoom_min:zoom_m,
-             })
-  marker.bindPopup(popup);
-  marker.on('mouseover', function (e) {
-    this.openPopup();
-  });
-  marker.on('mouseout', function (e) {
-    this.closePopup();
-  });
-}
-
 function debloque_code(e){
-  var id_obj = e.target.options.id_objet; 
-  fetch('objets_bloque_code.php', {
+  var id_obj = 'id_obj=' + e.target.options.id_objet;
+  console.log(id_obj);
+  fetch('objets.php', {
     method: 'post',
     body: id_obj,
     headers: {
@@ -231,7 +210,23 @@ function debloque_code(e){
     }
   })
   .then(r => r.json())
-  .then(console.log(r))
+  .then(r => {
+    let id_obj_debloque = r[0]['id_objet_debloque'];
+    let zoom_min = r[0]['zoom_min'];
+    let lat = r[0]['lat'];
+    let lon = r[0]['lon'];
+    let icone = r[0]['url'];
+    let type = r[0]['type'];
+    let popup = r[0]['popup'];
+    if (zoom_min == 10){
+      createMarker10(lat,lon,icone,popup,type,id_obj_debloque);
+    } else if (zoom_min == 14){
+      createMarker14(lat,lon,icone,popup,type,id_obj_debloque);
+    } else if (zoom_min == 16){
+      createMarker16(lat,lon,icone,popup,type,id_obj_debloque);
+    }
+  })
+  e.target.remove();
 }
 
 /*CHRONOMETRE*/
