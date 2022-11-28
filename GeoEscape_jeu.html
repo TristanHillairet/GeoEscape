@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="fr">
   <head>
-    <link rel="stylesheet" href="GeoEscape.css">
+    <link rel="stylesheet" href="GeoEscape_jeu.css">
     <meta charset="UTF-8">
     <title> DEMO </title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.2/dist/leaflet.css"
@@ -11,6 +11,9 @@
     integrity="sha256-o9N1jGDZrf5tS+Ft4gbIK7mYMipq9lqpVJ91xHSyKhg="
     crossorigin=""></script>
   </head>
+  <header>
+    <h1>GeoEscape</h1>
+  </header>
   <body>
     <div id="map"></div> 
     <div class="fenetre">  <!-- inventaire -->
@@ -18,7 +21,7 @@
     </div>
     <div classe="code">
       <input type="text" id="code">
-      <button type="button" onclick="debloque_code()"> Ok </button> 
+      <button type="button" id="button" onclick="debloque_code()"> Ok </button> 
     </div>
     <script src="GeoEscape_jeu.js"></script>
   </body>

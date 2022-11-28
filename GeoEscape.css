@@ -10,7 +10,7 @@ body {
     overflow-x: hidden;
     min-height: 100vh;
     display: grid;
-    grid-template-columns: 350px 1fr;
+    grid-template-columns: 750px 1fr;
     grid-template-rows: 50px 1fr 50px;
 }
 header{
@@ -48,18 +48,3 @@ header{
     text-align: center;
     font-family: 'Aldrich', sans-serif;
 }
-
-/*CSS JEU*/
-#map {
-    height: 600px;
-    width: 1000px;
-    margin: 100px;
-}
-
-.fenetre{
-    background-color: aliceblue;
-    height: 200px;
-    width: 200px;
-    margin-right : 10px;
-}
-
