@@ -35,11 +35,11 @@ if (isset($_POST['id'])){
   }  
 }
 
-else if (isset($_POST['id_obj'])){
+else if (isset($_POST['id_code_debloque'])){
   /* Recuperation infos objets bloqués */
 
-  $id_obj = $_POST['id_obj'];
-  $query_code = "SELECT * FROM objet AS o JOIN icone AS i ON o.id_icone=i.id_icone WHERE id_objet=$id_obj";
+  $id_code_debloque = $_POST['id_code_debloque'];
+  $query_code = "SELECT * FROM objet AS o JOIN icone AS i ON o.id_icone=i.id_icone WHERE id_objet=$id_code_debloque";
   $retour=mysqli_query($link, $query_code);
   $retours=[];
 
@@ -56,11 +56,11 @@ else if (isset($_POST['id_obj'])){
   }
 }
 
-else if (isset($_POST['id_obj_a_debloque'])){
+else if (isset($_POST['id_obj_debloque'])){
   /* Recuperation infos objets bloqués */
 
-  $id_obj_a_debloque = $_POST['id_obj_a_debloque'];
-  $query_obj = "SELECT * FROM objet AS o JOIN icone AS i ON o.id_icone=i.id_icone WHERE id_objet=$id_obj_a_debloque";
+  $id_obj_debloque = $_POST['id_obj_debloque'];
+  $query_obj = "SELECT * FROM objet AS o JOIN icone AS i ON o.id_icone=i.id_icone WHERE id_objet=$id_obj_debloque";
   $retour=mysqli_query($link, $query_obj);
   $retours=[];
 
