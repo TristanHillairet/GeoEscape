@@ -10,14 +10,15 @@ body {
     overflow-x: hidden;
     min-height: 100vh;
     display: grid;
-    grid-template-columns: 750px 1fr;
-    grid-template-rows: 50px 1fr 50px;
+    grid-template-columns: 700px 50px 200px 200px ;
+    grid-template-rows: 50px 50px 55px 55px 55px 55px 55px 55px 55px 55px 55px 55px 55px 55px 1fr;
 }
 header{
     color: white;
     font-family: 'Aldrich', sans-serif;
     text-align: center;
-    grid-column: 1/ span 2;
+    grid-column: 1 /span 5;
+    grid-row: 1;
 }
 
 
@@ -28,18 +29,25 @@ header{
     font-family: 'Aldrich', sans-serif;
     text-align : justify;
     grid-column: 1;
+    grid-row: 3 /span 15;
 }
-#debut{
+.button #debut{
+    width: 300px;
+    height: 100px;
+    position: absolute;
+    top: 400px;
+    left: 200px;
     display:inline-block;
     background-color: white;
     border-radius: 10px;
     border: 4px double #000000;
     color: black;
+    font-size: larger;
     text-align: center;
     font-family: 'Aldrich', sans-serif;
     grid-column: 1;
 }
-#debut:hover{
+.button #debut:hover{
     display:inline-block;
     background-color: rgb(0, 0, 0);
     border-radius: 10px;
@@ -48,3 +56,64 @@ header{
     text-align: center;
     font-family: 'Aldrich', sans-serif;
 }
+#highscores{
+    color:rgb(255, 255, 255);
+    font-family: 'Aldrich', sans-serif;
+    grid-column: 3 /span 5;
+    grid-row: 3 /span 15;
+}
+#highscores h2{
+    text-align: center;
+    grid-column: 4;
+    grid-row: 3
+}
+#highscores h4{
+    text-align: center;
+    grid-column: 3 /span 5;
+    grid-row: 4;
+}
+#highscores #temps{
+    text-align: center;
+    grid-column: 4;
+    grid-row: 4;
+}
+/*#highscores p #j1{
+    grid-column: 4;
+    grid-row: 5;
+}
+#highscores p #j2{
+    grid-column: 4;
+    grid-row: 6;
+}
+#highscores p #j3{
+    grid-column: 4;
+    grid-row: 7;
+}
+#highscores p #j4{
+    grid-column: 4;
+    grid-row: 8;
+}
+#highscores p #j5{
+    grid-column: 4;
+    grid-row: 9;
+}
+#highscores p #j6{
+    grid-column: 4;
+    grid-row: 10;
+}
+#highscores p #j7{
+    grid-column: 4;
+    grid-row: 11;
+}
+#highscores p #j8{
+    grid-column: 4;
+    grid-row: 12;
+}
+#highscores p #j9{
+    grid-column: 4;
+    grid-row: 13;
+}
+#highscores p #j10{
+    grid-column: 4;
+    grid-row: 14;
+}*/
