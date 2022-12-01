@@ -1,8 +1,3 @@
-<!--                  GEOESCAPE_ACCEUIL.HTML                 -->
-<!-- L.WECKER et T.HILLAIRET                                 -->
-<!-- 11/2022                                                 -->
-<!-- Définition du fichier                                   -->
-
 <!DOCTYPE html>
 <html lang="fr">
   <head>
@@ -15,7 +10,7 @@
     <h1>GeoEscape</h1>
   </header>
   <body>
-    <p id="description">
+    <div id="description">
         Bonjour Agent(e),
 
         Rendez-vous vite à Paris, la police vient de découvrir un cadavre. Il est plus que probable qu'il s'agisse d'un meurtre et beaucoup d'indice nous 
@@ -26,7 +21,11 @@
         On compte sur vous!
 
         Président(e) d'Interpol
-    </p>
-    <button id="debut">Commencer l'enquête</button>
+    </div>
+    <form class="button">
+    <button id="debut" type="submit" formaction="GeoEscape_jeu.html">Commencer l'enquête</button>
+    </form>
+    </div>
+    <script src="GeoEscape_acceuil.js"></script>
   </body>
 </html>
