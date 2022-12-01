@@ -6,7 +6,7 @@
 
 /*AFFICHAGE DE LA CARTE*/
 
-let paris = [51.5027761, 0.1243976];/*Point de départ*/
+let paris = [48.856614, 2.3522219];/*Point de départ*/
 let map = L.map('map').setView(paris, 13);/*Initialisation de la carte au point de départ*/
 
 L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
