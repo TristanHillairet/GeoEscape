@@ -58,13 +58,16 @@ let form = document.getElementById('inscription');
 function valider (event){
 
     let NOM = form.elements['nom'];
-
+    let BUTTON = document.getElementById("start");
+    
     if (NOM.value.length == 0){
         NOM.classList.add("invalide")
         alert('Rentrez un pseudo valide');
     }
 
     else{
+        NOM.classList.add("valide");
+        BUTTON.innerHTML = "<form class='button'><button id='debut' type='submit' formaction='GeoEscape_jeu.html'>Commencer l'enquête</button></form>";
         let pseudo = NOM.value;
         let nom = 'nom='+pseudo;
         fetch('joueurs.php',{
@@ -75,12 +78,7 @@ function valider (event){
             }
         })
         .then(r => r.text())
-        .then(r => {
-            console.log(r);
-        })
-        NOM.classList.add("valide");
     }
-  
 }
 
 form.addEventListener('submit',valider);
