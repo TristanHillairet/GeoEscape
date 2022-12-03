@@ -15,12 +15,20 @@ if (isset($_POST['nom'])){
 else if (isset($_POST['time'])){
 
     $query1 = "SELECT id FROM joueurs ORDER BY joueurs.id DESC LIMIT 1";
-    $id_j = mysqli_query($link, $query1); 
+    $ID_J = mysqli_query($link, $query1); 
+    $ID = [];
 
-    $time=$_POST['time'];
+    if (isset($ID_J)){
+        while($rowData = mysqli_fetch_array($ID_J)){
+            $id_j = $rowData["id"];
+        }
+    }   
 
-    $query2 = "UPDATE joueurs SET time=$time WHERE joueurs.id=$id_j";
+    $time = $_POST['time'];
+    $query2 = "UPDATE joueurs SET time='$time' WHERE joueurs.id='$id_j'";
     mysqli_query($link, $query2);
+
+    echo 'base de donnée modifiée';
 
 }
 

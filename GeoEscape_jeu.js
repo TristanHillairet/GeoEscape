@@ -1,21 +1,7 @@
-/*RECUPERE L'ID DU JOUEUR EN PARTIE*/
-fetch('joueurs.php', {
-  method: 'post',
-  body: 'id',
-  headers: {
-    'Content-Type': 'application/x-www-form-urlencoded'
-  }
-})
-.then(r => r.json())
-.then(r =>{
-  let id_p = r[0]["id"];
-  console.log(id_p);
-})
-
 /*INITIALISE LE TEMPS*/
 
-date = new Date();
-time_start = date.getTime();
+let date_start = new Date();
+let time_start = date_start.getTime()
 console.log(time_start);
 
 /*AFFICHAGE DE LA CARTE*/
@@ -316,13 +302,62 @@ function debloque_code(e){
 
 /* chronomètre */
 
+function calculTime(){
 
+  let date_end = new Date();
+  let time_end = date_end.getTime();
+
+  let time_tot = time_end - time_start;
+  time_tot *= Math.pow(10,-3);
+  let time_tot_sec = Math.floor(time_tot);
+
+  let time_hour = Math.floor(time_tot_sec / 3600); let str_hour = '';
+  let time_min = Math.floor(time_tot_sec / 60); let str_min = '';
+  let time_sec = time_tot_sec - Math.floor(time_min) * 60; let str_sec = '';
+
+  if (time_hour < 10){
+    str_hour = '0'+time_hour.toString();
+  }
+  
+  else {
+    str_hour = time_hour.toString();
+  }
+
+  if (time_min < 10){
+    str_min = '0'+time_min.toString();
+  }
+
+  else {
+    str_min = time_min.toString();
+  }
+
+  if (time_sec < 10){
+    str_sec = '0'+time_sec.toString();
+  }
+  
+  else {
+    str_sec = time_sec.toString();
+  }
+
+  let time = 'time='+str_hour+':'+str_min+':'+str_sec;
+  fetch('joueurs.php', {
+    method: 'post',
+    body: time,
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded'
+    }
+  })
+  .then(r => r.text())
+  .then(r => {
+    console.log(r);
+  })
+}
 
 /* code de fin du jeu */
 
 function the_end(e){
   recup(e);
-  var button_fin = "<form class='button'><button id='debut' type='submit' formaction='GeoEscape_fin.html'>Finir l'enquête</button></form>";
+  var button_fin = "<form class='button'><button id='debut' type='submit' formaction='GeoEscape_fin.html' onclick='calculTime();' >Finir l'enquête</button></form>";
   var popup = L.popup();
   popup
       .setLatLng(e.latlng)
@@ -332,6 +367,6 @@ function the_end(e){
 
 
 
-
+ 
 
 
