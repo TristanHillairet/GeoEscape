@@ -13,7 +13,7 @@ tables (objets, joueurs, icone)
 
 Ce jeu est programmé avec 4 type de languages : HTML, JavaScript, PHP, CSS.
 
--------------------------------------------TELECHARGEMENT----------------------------------------------
+-------------------------------------------TELECHARGEMENT---------------------------------------------- \n
 Pour pouvoir jouer l'installation de MAMP est nécéssaires si vous ne le possèdez pas, il faut l'installer
 (lien vers mamp : https://www.mamp.info/en/downloads/ ). Il exsite deux façon pour télécharger le jeu:
 
