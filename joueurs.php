@@ -32,6 +32,35 @@ else if (isset($_POST['time'])){
 
 }
 
+else if (isset($_POST['endpage'])){
+
+    $query1 = "SELECT id FROM joueurs ORDER BY joueurs.id DESC LIMIT 1";
+    $ID_J = mysqli_query($link, $query1); 
+    $ID = [];
+
+    if (isset($ID_J)){
+        while($rowData = mysqli_fetch_array($ID_J)){
+            $id_j = $rowData["id"];
+        }
+    }  
+
+    $query2 = "SELECT nom,time FROM joueurs WHERE joueurs.id='$id_j'";
+    $joueur = mysqli_query($link, $query2);
+    $joueurs = [];
+
+    if (isset($joueur)){
+        while($rows1 = mysqli_fetch_assoc($joueur)){
+            $joueurs[]=$rows1;
+        }
+        echo json_encode($joueurs, JSON_NUMERIC_CHECK);
+    }
+
+    else if (!isset($joueur)){
+        echo "la requête n'est pas bonne";
+    }
+    
+}
+
 else {
 
     $query = "SELECT nom,time FROM joueurs ORDER BY joueurs.time ASC LIMIT 10";

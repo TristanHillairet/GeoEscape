@@ -1,20 +1,24 @@
+/*CE CSS SERT AU STYLE DE LA PAGE D'ACCEUIL DU JEU*/
+
+/*en tête de la page*/
+header{
+    background-color: black;
+    color: white;
+    font-family: 'Aldrich', sans-serif;
+    text-align: center;
+    grid-column: 1/span 3;
+    grid-row: 1;
+}
+
+/*corps de la page*/
 body {
-    background-image: url(image_icon/tableau_vert.jpg);
+    background-image: url(image_icon/acceuil.jpeg) ;
     margin: 0;
     overflow-x: hidden;
     min-height: 100vh;
     display: grid;
     grid-template-columns: 750px 325px 1fr;
     grid-template-rows: 100px 50px 50px 50px 50px 50px 50px 50px 50px 50px 50px 50px 50px 1fr;
-}
-
-/*en tête de la page*/
-header{
-    color: white;
-    font-family: 'Aldrich', sans-serif;
-    text-align: center;
-    grid-column: 1/span 3;
-    grid-row: 1;
 }
 
 /*Descriptif du jeu*/
@@ -39,7 +43,6 @@ header{
 
 /*Formulaire*/
 #form{
-    background-color: aquamarine;
     color : white;
     font-family: 'Aldrich', sans-serif;
     text-align: center;
@@ -70,9 +73,10 @@ header{
     font-family: 'Aldrich', sans-serif;
 }
 #start .button #debut:hover{
-    border: solid 2px black;
+    background-color: white;
+    border: solid 2px darkred;
     border-radius: 20px;
-    color: black;
+    color: darkred;
     font-family: 'Aldrich', sans-serif;
 }
 

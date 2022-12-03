@@ -1,8 +1,6 @@
-/*RECUPERATION DES 10 MEILLEURS JOUEURS*/
-let test = 1;
-let noms = [];
-let times = [];
+/*CE FICHIER SERT AU DYNAMISME DE LA PAGE D'ACCEUIL*/
 
+/*RECUPERATION DES 10 MEILLEURS JOUEURS*/
 fetch('joueurs.php', {
     method: 'post',
     body: null,
@@ -54,6 +52,7 @@ fetch('joueurs.php', {
     t10.innerHTML = '<p>'+r[9]['time']+'</p>';
 })
 
+/*INSCRIPTION DU JOUEUR DANS LA BASE DE DONNEE*/
 let form = document.getElementById('inscription');
 
 function valider (event){

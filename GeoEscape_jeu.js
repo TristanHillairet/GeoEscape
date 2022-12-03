@@ -1,11 +1,11 @@
-/*INITIALISE LE TEMPS*/
+/*CE FICHIER SERT A RENDRE DYNAMIQUE LA PAGE DE JEU*/
 
+/*INITIALISE LE TEMPS*/
 let date_start = new Date();
 let time_start = date_start.getTime()
 console.log(time_start);
 
 /*AFFICHAGE DE LA CARTE*/
-
 let paris = [48.856614, 2.3522219];/*Point de départ*/
 let map = L.map('map').setView(paris, 13);/*Initialisation de la carte au point de départ*/
 
@@ -13,8 +13,7 @@ L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
 }).addTo(map);/*Chargement du fond openstreetmap*/
 
-/*RECHERCHE DANS LA BDD*/
-
+/*RECHERCHE DES OBJETS DANS LA BDD*/
 fetch('objets.php', {
   method: 'post',
   headers: {
@@ -47,14 +46,12 @@ fetch('objets.php', {
 })
 
 
-// initialisation des layers
-
+/*AFFICHAGE DES OBJETS SUR LA CARTE*/
 let layergroup_10 = L.layerGroup();
 let layergroup_14 = L.layerGroup();
 let layergroup_16 = L.layerGroup(); 
 
 // fonction d'initialisation
-
 function initialisation(lat,lon,zoom_m,icone,popup,type,id,id_objet_bloque,id_necessaire_pour_debloque,code,size_icone_x,size_icone_y,indice,bool_indice){
   if (zoom_m == 10){
     createMarker10(lat,lon,icone,popup,type,id,id_objet_bloque,id_necessaire_pour_debloque,code,size_icone_x,size_icone_y,indice,bool_indice);/*cf création markers*/
@@ -156,7 +153,6 @@ function createMarker16(lat,lon,icone,popup,type,id,id_objet_bloque,id_necessair
 }
 
 //Affichage des markers de niveau de zoom correspondant
-
 map.on('zoom',function(){
   var zoom = map.getZoom();
   console.log(zoom);
@@ -193,8 +189,7 @@ function recherche_type(e){
   }
 }
 
-//     /*RECUPERATION DE L'OBJET SUR LA CARTE POUR L'INVENTAIRE*/
-
+/*MISE DES OBJETS DANS L'INVENTAIRE*/
 let inventaire = [];
 
 function recup(e){
@@ -204,36 +199,37 @@ function recup(e){
   affiche_inventaire_apres_recup(inventaire);
 };
 
+//Affiche l'objet dans l'inventaire
 function affiche_inventaire_apres_recup(inventaire){
   for (i=0;i<inventaire.length;i++){
     var url_icone = inventaire[i].target.options.icon.options.iconUrl;
     var div_img = document.getElementById(i+1);
-    div_img.style.widht='200px';
-    div_img.style.height='200px';
+    div_img.style.widht='100px';
+    div_img.style.height='100px';
     div_img.src=url_icone;
   }
 }
 
+//Affiche l'objet débloqué par un objet dans l'inventaire
 function affiche_inventaire_apres_debloque(inventaire){
   var j=1;
   for (i=0;i<inventaire.length;i++){
     var url_icone = inventaire[i].target.options.icon.options.iconUrl;
     var div_img = document.getElementById(i+1);
-    div_img.style.widht='200px';
-    div_img.style.height='200px';
+    div_img.style.widht='100px';
+    div_img.style.height='100px';
     div_img.src=url_icone;
     j+=1;
   }
   var url_icone = "";
   var div_img = document.getElementById(j);
-  div_img.style.widht='200px';
-  div_img.style.height='200px';
+  div_img.style.widht='100px';
+  div_img.style.height='100px';
   div_img.src=url_icone;
 }
 
 
 /*CONNEXION A LA BASE DE DONNEE POUR RECUPERER DES OBJETS BLOQUE*/
-
 function connexion_bdd_objet(body){
   fetch('objets.php',{
     method: 'post',
@@ -263,7 +259,6 @@ function connexion_bdd_objet(body){
 }
 
 /*DEBLOQUER UN OBJET*/
-
 function debloque_objet(e){
   var id_obj_pour_debloque = e.target.options.id_necessaire_pour_debloque
   for (i=0;i<=inventaire.length;i++){                 // pas necessaire pour nous, mais si on veut rajouter des objets si
@@ -282,7 +277,6 @@ function debloque_objet(e){
 }
 
 /*DEBLOQUER UN OBJET BLOQUE PAR CODE*/
-
 function debloque_code(e){
   console.log(e);
   var code = prompt("entrez le code ici");
@@ -300,45 +294,34 @@ function debloque_code(e){
 }
 
 
-/* chronomètre */
-
+/* CALCUL DU SCORE */
 function calculTime(){
-
   let date_end = new Date();
   let time_end = date_end.getTime();
-
   let time_tot = time_end - time_start;
   time_tot *= Math.pow(10,-3);
   let time_tot_sec = Math.floor(time_tot);
-
   let time_hour = Math.floor(time_tot_sec / 3600); let str_hour = '';
   let time_min = Math.floor(time_tot_sec / 60); let str_min = '';
   let time_sec = time_tot_sec - Math.floor(time_min) * 60; let str_sec = '';
-
   if (time_hour < 10){
     str_hour = '0'+time_hour.toString();
   }
-  
   else {
     str_hour = time_hour.toString();
   }
-
   if (time_min < 10){
     str_min = '0'+time_min.toString();
   }
-
   else {
     str_min = time_min.toString();
   }
-
   if (time_sec < 10){
     str_sec = '0'+time_sec.toString();
   }
-  
   else {
     str_sec = time_sec.toString();
   }
-
   let time = 'time='+str_hour+':'+str_min+':'+str_sec;
   fetch('joueurs.php', {
     method: 'post',
@@ -353,11 +336,10 @@ function calculTime(){
   })
 }
 
-/* code de fin du jeu */
-
+/*DEFINI LA FIN DU JEU*/
 function the_end(e){
   recup(e);
-  var button_fin = "<form class='button'><button id='debut' type='submit' formaction='GeoEscape_fin.html' onclick='calculTime();' >Finir l'enquête</button></form>";
+  var button_fin = "<form class='button'><button id='debut' type='submit' formaction='GeoEscape_fin.html' onclick='calculTime();' >ARRESTATION</button></form>";
   var popup = L.popup();
   popup
       .setLatLng(e.latlng)

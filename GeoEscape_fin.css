@@ -1,15 +1,19 @@
+/*CE CSS SERT DE STYLE A LA PAGE DE FIN DU JEU*/
+
+/*corps de la pge*/
 body {
-    background-color: #E9967A	;
+    background-image: url(image_icon/end.png);
     margin: 0;
     overflow-x: hidden;
     min-height: 100vh;
     display: grid;
-    grid-template-columns: 1250px 1fr;
-    grid-template-rows: 50px 50px 1fr 50px;
+    grid-template-columns: 1fr 500px 1fr;
+    grid-template-rows: 100px 100px 100px 100px 100px 100px 100px 1fr;
 }
 
 /*en tête de la page*/
 header{
+    background-color: black;
     color: white;
     font-family: 'Aldrich', sans-serif;
     text-align: center;
@@ -17,8 +21,85 @@ header{
     grid-row: 1;
 }
 
+/*image animée des confettis*/
 #confetti{
     display: block;
-    width: 70%;
+    width: 100%;
     margin: auto;
+}
+
+/*textes*/
+#felicitations {
+    border-top: solid white 5px;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    border-right: solid white 5px;
+    border-left: solid white 5px;
+    background-color: darkred;
+    grid-row: 3;
+    grid-column: 2;
+    text-align: center;
+    font-family: 'Aldrich', sans-serif;
+    color: white;
+}
+#nom{
+    background-color: darkred;
+    border-right: solid white 5px;
+    border-left: solid white 5px;
+    grid-row: 4;
+    grid-column: 2;
+    text-align: center;
+    font-family: 'Aldrich', sans-serif;
+    color: white;
+}
+#texte{
+    background-color: darkred;
+    border-right: solid white 5px;
+    border-left: solid white 5px;
+    grid-row: 5;
+    grid-column: 2;
+    text-align: center;
+    font-family: 'Aldrich', sans-serif;
+    color: white;
+}
+#score{
+    background-color: darkred;
+    border-right: solid white 5px;
+    border-left: solid white 5px;
+    grid-row: 6;
+    grid-column: 2;
+    text-align: center;
+    font-family: 'Aldrich', sans-serif;
+    color: white;
+}
+
+/*bouton retour à la page départ*/
+#return_start{
+    background-color: darkred;
+    border-bottom: solid white 5px;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    border-right: solid white 5px;
+    border-left: solid white 5px;
+    grid-row: 7;
+    grid-column: 2;
+    text-align: center;
+    font-family: 'Aldrich', sans-serif;
+    color:white;
+}
+#return_start .button #start{
+    border: solid 2px white;
+    border-radius: 20px;
+    color: white;
+    background-color: darkred	;
+    font-size:24px;
+    font-family: 'Aldrich', sans-serif;
+}
+#return_start .button #start:hover{
+    border: solid 2px darkred;
+    border-radius: 20px;
+    color: darkred;
+    background-color: white	;
+    font-size:24px;
+    font-family: 'Aldrich', sans-serif;
 }
