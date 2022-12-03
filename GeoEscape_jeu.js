@@ -1,8 +1,22 @@
-//                                      GEOESCAPE_JEU.JS
-// L.WECKER et T.HILLAIRET
-// 11/2022
-// Définition et utilité du fichier
+/*RECUPERE L'ID DU JOUEUR EN PARTIE*/
+fetch('joueurs.php', {
+  method: 'post',
+  body: 'id',
+  headers: {
+    'Content-Type': 'application/x-www-form-urlencoded'
+  }
+})
+.then(r => r.json())
+.then(r =>{
+  let id_p = r[0]["id"];
+  console.log(id_p);
+})
 
+/*INITIALISE LE TEMPS*/
+
+date = new Date();
+time_start = date.getTime();
+console.log(time_start);
 
 /*AFFICHAGE DE LA CARTE*/
 
