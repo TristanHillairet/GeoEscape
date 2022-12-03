@@ -39,6 +39,22 @@ header{
     grid-row: 3/span 6;
 }
 
+/*Formulaire*/
+#form{
+    background-color: aquamarine;
+    color : white;
+    font-family: 'Aldrich', sans-serif;
+    text-align: center;
+    grid-column: 1;
+    grid-row: 9/span 3;
+}
+.invalide{
+    background-color: red;
+}
+.valide{
+    background-color: green;
+}
+
 /*Bouton commencer*/
 #start{
     background-color: violet;
@@ -46,7 +62,7 @@ header{
     font-family: 'Aldrich', sans-serif;
     text-align: center;
     grid-column: 1;
-    grid-row: 9;
+    grid-row: 12;
 }
 #start .button #debut{
     background-color: black;

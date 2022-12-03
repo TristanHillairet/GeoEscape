@@ -1,4 +1,5 @@
 /*RECUPERATION DES 10 MEILLEURS JOUEURS*/
+let test = 1;
 let noms = [];
 let times = [];
 
@@ -53,3 +54,34 @@ fetch('joueurs.php', {
     t10.innerHTML = '<p>'+r[9]['time']+'</p>';
 })
 
+let form = document.getElementById('inscription');
+
+function valider (event){
+
+    let NOM = form.elements['nom'];
+
+    if (NOM.value.length == 0){
+        NOM.classList.add("invalide")
+        alert('Rentrez un pseudo valide');
+    }
+
+    else{
+        let pseudo = NOM.value;
+        let nom = 'nom='+pseudo;
+        fetch('joueurs.php',{
+            method: 'post',
+            body: nom,
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            }
+        })
+        .then(r => r.text())
+        .then(r => {
+            console.log(r);
+        })
+        NOM.classList.add("valide");
+    }
+  
+}
+
+form.addEventListener('submit',valider);

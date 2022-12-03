@@ -4,30 +4,23 @@ include("connect.php");
 
 if (isset($_POST['nom'])){
 
-    $nom=$_POST['nom'];
-    $query = "INSERT INTO joueurs(id,nom,time) VALUES (NULL,$nom,NULL)";
+    $nom_j = $_POST['nom'];
+    $query = "INSERT INTO joueurs(id,nom,time) VALUES (NULL,'$nom_j','06:00:00')";
     mysqli_query($link, $query);
 
-    $query2 = "SELECT id FROM joueurs ORDER BY joueurs.id DESC LIMIT 1";
-    $id = mysqli_query($link, $query2);
-
-    if (isset($id)){
-        echo $id;
-    }
-
-    else if (!isset($id)) {
-        echo "la requête n'est pas bonne";
-    }
+    echo 'base de donnée modifiée';
 
 }
 
-else if (isset($_POST['data'])){
+else if (isset($_POST['time'])){
 
-    $time=$_POST['data']['time'];
-    $id=$_POST['data']['id'];
+    $query1 = "SELECT id FROM joueurs ORDER BY joueurs.id DESC LIMIT 1";
+    $id_j = mysqli_query($link, $query1); 
 
-    $query = "UPDATE joueurs SET time=$time WHERE joueurs.id=$id";
-    mysqli_query($link, $query);
+    $time=$_POST['time'];
+
+    $query2 = "UPDATE joueurs SET time=$time WHERE joueurs.id=$id_j";
+    mysqli_query($link, $query2);
 
 }
 
