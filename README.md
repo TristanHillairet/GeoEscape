@@ -1,7 +1,7 @@
---------------------------------------------JEU GEO ESCAPE 2022----------------------------------------
+--------------------------------------------JEU GEO ESCAPE 2022------------------------------------------
 Réalisé par Lilian WECKER et Tristan HILLAIRET en novembre 2022
 
---------------------------------------------DESCRPTION DU JEU------------------------------------------
+--------------------------------------------DESCRPTION DU JEU--------------------------------------------
 Le jeu est un escape game se déroulant sur une carte. Il s'agit se mettre dans la peau d'un enquêteur 
 à la poursuite d'un serial-killer qui sévit à l'international. 
 
@@ -13,7 +13,7 @@ tables (objets, joueurs, icone)
 
 Ce jeu est programmé avec 4 type de languages : HTML, JavaScript, PHP, CSS.
 
--------------------------------------------TELECHARGEMENT---------------------------------------------- \n
+-------------------------------------------TELECHARGEMENT-------------------------------------------------
 Pour pouvoir jouer l'installation de MAMP est nécéssaires si vous ne le possèdez pas, il faut l'installer
 (lien vers mamp : https://www.mamp.info/en/downloads/ ). Il exsite deux façon pour télécharger le jeu:
 
