@@ -1,0 +1,317 @@
+body {
+    background-color: #111111;
+    margin: 0;
+    overflow-x: hidden;
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 750px 325px 1fr;
+    grid-template-rows: 100px 50px 50px 50px 50px 50px 50px 50px 50px 50px 50px 50px 50px 1fr;
+}
+
+/*en tête de la page*/
+header{
+    color: white;
+    font-family: 'Aldrich', sans-serif;
+    text-align: center;
+    grid-column: 1/span 3;
+    grid-row: 1;
+}
+
+/*Descriptif du jeu*/
+#mission_title{
+    border-left: solid 100px pink;
+    background-color: pink;
+    color: white;
+    font-family: 'Aldrich', sans-serif;
+    text-align: left;
+    grid-column: 1;
+    grid-row: 2;
+}
+#mission{
+    border-left: solid 50px red;
+    border-right: solid 50px red;
+    background-color: red;
+    color: white;
+    font-family: 'Aldrich', sans-serif;
+    font-size: large;
+    text-align: left;
+    grid-column: 1;
+    grid-row: 3/span 6;
+}
+
+/*Bouton commencer*/
+#start{
+    background-color: violet;
+    color: white;
+    font-family: 'Aldrich', sans-serif;
+    text-align: center;
+    grid-column: 1;
+    grid-row: 9;
+}
+#start .button #debut{
+    background-color: black;
+    border: solid 2px white;
+    border-radius: 20px;
+    color: white;
+    font-size:24px;
+    font-family: 'Aldrich', sans-serif;
+}
+#start .button #debut:hover{
+    background-color: white;
+    border: solid 2px black;
+    border-radius: 20px;
+    color: black;
+    font-family: 'Aldrich', sans-serif;
+}
+
+/*Tableau des scores*/
+#score_title{
+    border: solid 2px white;
+    background-color: gray;
+    color: white;
+    font-family: 'Aldrich', sans-serif;
+    text-align: center;
+    grid-column: 2/span 2;
+    grid-row: 2;
+}
+#players{
+    border-left: solid 2px white;
+    border-bottom: solid 2px white;
+    background-color: blue;
+    color: white;
+    font-family: 'Aldrich', sans-serif;
+    text-align: center;
+    grid-column: 2;
+    grid-row: 3;
+}
+#p1{
+    border-left: solid 2px white;
+    border-bottom: solid 2px white;
+    background-color: orange;
+    color: white;
+    font-family: 'Aldrich', sans-serif;
+    text-align: center;
+    grid-column: 2;
+    grid-row: 4;
+}
+#p2{
+    border-left: solid 2px white;
+    border-bottom: solid 2px white;
+    background-color: orange;
+    color: white;
+    font-family: 'Aldrich', sans-serif;
+    text-align: center;
+    grid-column: 2;
+    grid-row: 5;
+}
+#p3{
+    border-left: solid 2px white;
+    border-bottom: solid 2px white;
+    background-color: orange;
+    color: white;
+    font-family: 'Aldrich', sans-serif;
+    text-align: center;
+    grid-column: 2;
+    grid-row: 6;
+}
+#p4{
+    border-left: solid 2px white;
+    border-bottom: solid 2px white;
+    background-color: orange;
+    color: white;
+    font-family: 'Aldrich', sans-serif;
+    text-align: center;
+    grid-column: 2;
+    grid-row: 7;
+}
+#p5{
+    border-left: solid 2px white;
+    border-bottom: solid 2px white;
+    background-color: orange;
+    color: white;
+    font-family: 'Aldrich', sans-serif;
+    text-align: center;
+    grid-column: 2;
+    grid-row: 8;
+}
+#p6{
+    border-left: solid 2px white;
+    border-bottom: solid 2px white;
+    background-color: orange;
+    color: white;
+    font-family: 'Aldrich', sans-serif;
+    text-align: center;
+    grid-column: 2;
+    grid-row: 9;
+}
+#p7{
+    border-left: solid 2px white;
+    border-bottom: solid 2px white;
+    background-color: orange;
+    color: white;
+    font-family: 'Aldrich', sans-serif;
+    text-align: center;
+    grid-column: 2;
+    grid-row: 10;
+}
+#p8{
+    border-left: solid 2px white;
+    border-bottom: solid 2px white;
+    background-color: orange;
+    color: white;
+    font-family: 'Aldrich', sans-serif;
+    text-align: center;
+    grid-column: 2;
+    grid-row: 11;
+}
+#p9{
+    border-left: solid 2px white;
+    border-bottom: solid 2px white;
+    background-color: orange;
+    color: white;
+    font-family: 'Aldrich', sans-serif;
+    text-align: center;
+    grid-column: 2;
+    grid-row: 12;
+}
+#p9{
+    border-left: solid 2px white;
+    border-bottom: solid 2px white;
+    background-color: orange;
+    color: white;
+    font-family: 'Aldrich', sans-serif;
+    text-align: center;
+    grid-column: 2;
+    grid-row: 12;
+}
+#p10{
+    border-left: solid 2px white;
+    border-bottom: solid 2px white;
+    background-color: orange;
+    color: white;
+    font-family: 'Aldrich', sans-serif;
+    text-align: center;
+    grid-column: 2;
+    grid-row: 13;
+}
+#scores{
+    border-left: solid 2px white;
+    border-right: solid 2px white;
+    border-bottom: solid 2px white;
+    background-color: green;
+    color: white;
+    font-family: 'Aldrich', sans-serif;
+    text-align: center;
+    grid-column: 3;
+    grid-row: 3;
+}
+#t1{
+    border-left: solid 2px white;
+    border-right: solid 2px white;
+    border-bottom: solid 2px white;
+    background-color: blueviolet;
+    color: white;
+    font-family: 'Aldrich', sans-serif;
+    text-align: center;
+    grid-column: 3;
+    grid-row: 4;
+}
+#t2{
+    border-left: solid 2px white;
+    border-right: solid 2px white;
+    border-bottom: solid 2px white;
+    background-color: blueviolet;
+    color: white;
+    font-family: 'Aldrich', sans-serif;
+    text-align: center;
+    grid-column: 3;
+    grid-row: 5;
+}
+#t3{
+    border-left: solid 2px white;
+    border-right: solid 2px white;
+    border-bottom: solid 2px white;
+    background-color: blueviolet;
+    color: white;
+    font-family: 'Aldrich', sans-serif;
+    text-align: center;
+    grid-column: 3;
+    grid-row: 6;
+}
+#t4{
+    border-left: solid 2px white;
+    border-right: solid 2px white;
+    border-bottom: solid 2px white;
+    background-color: blueviolet;
+    color: white;
+    font-family: 'Aldrich', sans-serif;
+    text-align: center;
+    grid-column: 3;
+    grid-row: 7;
+}
+#t5{
+    border-left: solid 2px white;
+    border-right: solid 2px white;
+    border-bottom: solid 2px white;
+    background-color: blueviolet;
+    color: white;
+    font-family: 'Aldrich', sans-serif;
+    text-align: center;
+    grid-column: 3;
+    grid-row: 8;
+}
+#t6{
+    border-left: solid 2px white;
+    border-right: solid 2px white;
+    border-bottom: solid 2px white;
+    background-color: blueviolet;
+    color: white;
+    font-family: 'Aldrich', sans-serif;
+    text-align: center;
+    grid-column: 3;
+    grid-row: 9;
+}
+#t7{
+    border-left: solid 2px white;
+    border-right: solid 2px white;
+    border-bottom: solid 2px white;
+    background-color: blueviolet;
+    color: white;
+    font-family: 'Aldrich', sans-serif;
+    text-align: center;
+    grid-column: 3;
+    grid-row: 10;
+}
+#t8{
+    border-left: solid 2px white;
+    border-right: solid 2px white;
+    border-bottom: solid 2px white;
+    background-color: blueviolet;
+    color: white;
+    font-family: 'Aldrich', sans-serif;
+    text-align: center;
+    grid-column: 3;
+    grid-row: 11;
+}
+#t9{
+    border-left: solid 2px white;
+    border-right: solid 2px white;
+    border-bottom: solid 2px white;
+    background-color: blueviolet;
+    color: white;
+    font-family: 'Aldrich', sans-serif;
+    text-align: center;
+    grid-column: 3;
+    grid-row: 12;
+}
+#t10{
+    border-left: solid 2px white;
+    border-right: solid 2px white;
+    border-bottom: solid 2px white;
+    background-color: blueviolet;
+    color: white;
+    font-family: 'Aldrich', sans-serif;
+    text-align: center;
+    grid-column: 3;
+    grid-row: 13;
+}
