@@ -52,8 +52,10 @@ fetch('objets.php', {
     let code = r[i]['code'];
     let size_icone_x = r[i]['taille_x'];
     let size_icone_y = r[i]['taille_y'];
+    let indice = r[i]['indice'];
+    let bool_indice = r[i]['bool_indice'];
     if (debut == 1){
-      initialisation(lat,lon,zoom_m,icone,popup,type,id,id_objet_bloque,id_necessaire_pour_debloque,code,size_icone_x,size_icone_y);
+      initialisation(lat,lon,zoom_m,icone,popup,type,id,id_objet_bloque,id_necessaire_pour_debloque,code,size_icone_x,size_icone_y,indice,bool_indice);
     }
   } 
 })
@@ -67,18 +69,18 @@ let layergroup_16 = L.layerGroup();
 
 // fonction d'initialisation
 
-function initialisation(lat,lon,zoom_m,icone,popup,type,id,id_objet_bloque,id_necessaire_pour_debloque,code,size_icone_x,size_icone_y){
+function initialisation(lat,lon,zoom_m,icone,popup,type,id,id_objet_bloque,id_necessaire_pour_debloque,code,size_icone_x,size_icone_y,indice,bool_indice){
   if (zoom_m == 10){
-    createMarker10(lat,lon,icone,popup,type,id,id_objet_bloque,id_necessaire_pour_debloque,code,size_icone_x,size_icone_y);/*cf création markers*/
+    createMarker10(lat,lon,icone,popup,type,id,id_objet_bloque,id_necessaire_pour_debloque,code,size_icone_x,size_icone_y,indice,bool_indice);/*cf création markers*/
   } else if (zoom_m == 14){        
-    createMarker14(lat,lon,icone,popup,type,id,id_objet_bloque,id_necessaire_pour_debloque,code,size_icone_x,size_icone_y);/*cf création markers*/
+    createMarker14(lat,lon,icone,popup,type,id,id_objet_bloque,id_necessaire_pour_debloque,code,size_icone_x,size_icone_y,indice,bool_indice);/*cf création markers*/
   } else if (zoom_m == 16){
-    createMarker16(lat,lon,icone,popup,type,id,id_objet_bloque,id_necessaire_pour_debloque,code,size_icone_x,size_icone_y);/*cf création markers*/
+    createMarker16(lat,lon,icone,popup,type,id,id_objet_bloque,id_necessaire_pour_debloque,code,size_icone_x,size_icone_y,indice,bool_indice);/*cf création markers*/
   }
 }
 
 //Création d'un marker de niveau de zoom minimum 10
-function createMarker10(lat,lon,icone,popup,type,id,id_objet_bloque,id_necessaire_pour_debloque,code,size_icone_x,size_icone_y){
+function createMarker10(lat,lon,icone,popup,type,id,id_objet_bloque,id_necessaire_pour_debloque,code,size_icone_x,size_icone_y,indice,bool_indice){
   var img = L.icon({
     iconUrl: icone,
     iconSize: [size_icone_x, size_icone_y],
@@ -91,7 +93,9 @@ function createMarker10(lat,lon,icone,popup,type,id,id_objet_bloque,id_necessair
               id_objet:id,
               id_objet_bloque:id_objet_bloque,
               id_necessaire_pour_debloque:id_necessaire_pour_debloque,
-              code: code
+              code: code,
+              indice: indice,
+              bool_indice : bool_indice
              })
   marker.bindPopup(popup);
   layergroup_10.addLayer(marker);/*Ajout du marker au layer10*/
@@ -106,7 +110,7 @@ function createMarker10(lat,lon,icone,popup,type,id,id_objet_bloque,id_necessair
 }
 
 //Création d'un marker de niveau de zoom minimum 14
-function createMarker14(lat,lon,icone,popup,type,id,id_objet_bloque,id_necessaire_pour_debloque,code,size_icone_x,size_icone_y){
+function createMarker14(lat,lon,icone,popup,type,id,id_objet_bloque,id_necessaire_pour_debloque,code,size_icone_x,size_icone_y,indice,bool_indice){
   var img = L.icon({
     iconUrl: icone,
     iconSize: [size_icone_x, size_icone_y],
@@ -119,7 +123,9 @@ function createMarker14(lat,lon,icone,popup,type,id,id_objet_bloque,id_necessair
               id_objet:id,
               id_objet_bloque:id_objet_bloque,
               id_necessaire_pour_debloque:id_necessaire_pour_debloque,
-              code:code
+              code:code,
+              indice:indice,
+              bool_indice:bool_indice
             });
   marker.bindPopup(popup);
   layergroup_14.addLayer(marker);/*Ajout du marker au layer14*/
@@ -134,7 +140,7 @@ function createMarker14(lat,lon,icone,popup,type,id,id_objet_bloque,id_necessair
 }
 
 //Création d'un marker de niveau de zoom minimum 16
-function createMarker16(lat,lon,icone,popup,type,id,id_objet_bloque,id_necessaire_pour_debloque,code,size_icone_x,size_icone_y){
+function createMarker16(lat,lon,icone,popup,type,id,id_objet_bloque,id_necessaire_pour_debloque,code,size_icone_x,size_icone_y,indice,bool_indice){
   var img = L.icon({
     iconUrl: icone,
     iconSize: [size_icone_x, size_icone_y],
@@ -147,7 +153,9 @@ function createMarker16(lat,lon,icone,popup,type,id,id_objet_bloque,id_necessair
               id_objet: id,
               id_objet_bloque:id_objet_bloque,
               id_necessaire_pour_debloque:id_necessaire_pour_debloque,
-              code:code
+              code:code,
+              indice:indice,
+              bool_indice:bool_indice
             })
   marker.bindPopup(popup);
   layergroup_16.addLayer(marker);/*Ajout du marker au layer16*/
@@ -194,7 +202,9 @@ function recherche_type(e){
     debloque_code(e);
   } else if (typ == 3){
     debloque_objet(e);
-  } 
+  } else if (typ == 5){
+    the_end(e);
+  }
 }
 
 //     /*RECUPERATION DE L'OBJET SUR LA CARTE POUR L'INVENTAIRE*/
@@ -254,13 +264,15 @@ function connexion_bdd_objet(body){
     let zoom_m=r[0]['zoom_min'];
     let icone = r[0]['url'];
     let popup = r[0]['popup'];
-    let type = r[0]['type'];             //si 1 : récupérable ; si 2 : bloqué par code ; 3 :bloqué par objet ; 4: aucun des 3 
+    let type = r[0]['type'];             //1 : récupérable ; 2 : bloqué par code ; 3 :bloqué par objet ; 4: rien du tout ; 5: récupérable et dernier objet  
     let id_objet_bloque = r[0]['id_objet_bloque'];
     let id_necessaire_pour_debloque = r[0]['id_necessaire_pour_debloque'];
     let code = r[0]['code'];
     let size_icone_x = r[0]['taille_x'];
     let size_icone_y = r[0]['taille_y'];
-    initialisation(lat,lon,zoom_m,icone,popup,type,id,id_objet_bloque,id_necessaire_pour_debloque,code,size_icone_x,size_icone_y);
+    let indice = r[0]['indice'];
+    let bool_indice = r[0]['bool_indice'];
+    initialisation(lat,lon,zoom_m,icone,popup,type,id,id_objet_bloque,id_necessaire_pour_debloque,code,size_icone_x,size_icone_y,indice,bool_indice);
   })
 }
 
@@ -274,8 +286,11 @@ function debloque_objet(e){
       connexion_bdd_objet(id_obj_debloque);
       e.target.remove();
       inventaire.splice(i,1);
+    } else if (e.target.options.bool_indice==0){
+      e.target._popup._content = e.target._popup._content + e.target.options.indice;
+      console.log(e.target.options.indice);
+      e.target.options.bool_indice = 1;
     }
-    console.log(inventaire);
     affiche_inventaire_apres_debloque(inventaire);
   }
 }
@@ -283,20 +298,37 @@ function debloque_objet(e){
 /*DEBLOQUER UN OBJET BLOQUE PAR CODE*/
 
 function debloque_code(e){
-  var code = prompt("entrez le code pour décrypter la lettre");
+  console.log(e);
+  var code = prompt("entrez le code ici");
   alert(code);
   var verif_code = e.target.options.code;
   if (code.toUpperCase()==verif_code){
     var id_code_debloque = 'id_code_debloque='+e.target.options.id_objet_bloque;
     connexion_bdd_objet(id_code_debloque);
     e.target.remove();
-  } else {
-    alert("code mauvais")
-  }
+  } else if (e.target.options.bool_indice==0){
+    e.target._popup._content = e.target._popup._content + e.target.options.indice;
+    console.log(e.target.options.indice);
+    e.target.options.bool_indice = 1;
+  } 
 }
 
-/*RECUPERATION DU SCORE*/
 
+/* chronomètre */
+
+
+
+/* code de fin du jeu */
+
+function the_end(e){
+  recup(e);
+  var button_fin = "<form class='button'><button id='debut' type='submit' formaction='GeoEscape_fin.html'>Finir l'enquête</button></form>";
+  var popup = L.popup();
+  popup
+      .setLatLng(e.latlng)
+      .setContent(button_fin)
+      .openOn(map);
+}
 
 
 

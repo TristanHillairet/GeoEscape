@@ -1,5 +1,5 @@
 body {
-    background-color: #111111;
+    background-image: url(image_icon/tableau_vert.jpg);
     margin: 0;
     overflow-x: hidden;
     min-height: 100vh;
@@ -19,8 +19,7 @@ header{
 
 /*Descriptif du jeu*/
 #mission_title{
-    border-left: solid 100px pink;
-    background-color: pink;
+    border-left: solid 100px transparent;
     color: white;
     font-family: 'Aldrich', sans-serif;
     text-align: left;
@@ -28,9 +27,8 @@ header{
     grid-row: 2;
 }
 #mission{
-    border-left: solid 50px red;
-    border-right: solid 50px red;
-    background-color: red;
+    border-left: solid 50px transparent;
+    border-right: solid 50px transparent;
     color: white;
     font-family: 'Aldrich', sans-serif;
     font-size: large;
@@ -57,7 +55,6 @@ header{
 
 /*Bouton commencer*/
 #start{
-    background-color: violet;
     color: white;
     font-family: 'Aldrich', sans-serif;
     text-align: center;
@@ -65,15 +62,14 @@ header{
     grid-row: 12;
 }
 #start .button #debut{
-    background-color: black;
     border: solid 2px white;
     border-radius: 20px;
     color: white;
+    background-color: #8B0000	;
     font-size:24px;
     font-family: 'Aldrich', sans-serif;
 }
 #start .button #debut:hover{
-    background-color: white;
     border: solid 2px black;
     border-radius: 20px;
     color: black;
@@ -83,7 +79,6 @@ header{
 /*Tableau des scores*/
 #score_title{
     border: solid 2px white;
-    background-color: gray;
     color: white;
     font-family: 'Aldrich', sans-serif;
     text-align: center;
@@ -93,7 +88,6 @@ header{
 #players{
     border-left: solid 2px white;
     border-bottom: solid 2px white;
-    background-color: blue;
     color: white;
     font-family: 'Aldrich', sans-serif;
     text-align: center;
@@ -103,7 +97,6 @@ header{
 #p1{
     border-left: solid 2px white;
     border-bottom: solid 2px white;
-    background-color: orange;
     color: white;
     font-family: 'Aldrich', sans-serif;
     text-align: center;
@@ -113,7 +106,6 @@ header{
 #p2{
     border-left: solid 2px white;
     border-bottom: solid 2px white;
-    background-color: orange;
     color: white;
     font-family: 'Aldrich', sans-serif;
     text-align: center;
@@ -123,7 +115,6 @@ header{
 #p3{
     border-left: solid 2px white;
     border-bottom: solid 2px white;
-    background-color: orange;
     color: white;
     font-family: 'Aldrich', sans-serif;
     text-align: center;
@@ -133,7 +124,6 @@ header{
 #p4{
     border-left: solid 2px white;
     border-bottom: solid 2px white;
-    background-color: orange;
     color: white;
     font-family: 'Aldrich', sans-serif;
     text-align: center;
@@ -143,7 +133,6 @@ header{
 #p5{
     border-left: solid 2px white;
     border-bottom: solid 2px white;
-    background-color: orange;
     color: white;
     font-family: 'Aldrich', sans-serif;
     text-align: center;
@@ -153,7 +142,6 @@ header{
 #p6{
     border-left: solid 2px white;
     border-bottom: solid 2px white;
-    background-color: orange;
     color: white;
     font-family: 'Aldrich', sans-serif;
     text-align: center;
@@ -163,7 +151,6 @@ header{
 #p7{
     border-left: solid 2px white;
     border-bottom: solid 2px white;
-    background-color: orange;
     color: white;
     font-family: 'Aldrich', sans-serif;
     text-align: center;
@@ -173,7 +160,6 @@ header{
 #p8{
     border-left: solid 2px white;
     border-bottom: solid 2px white;
-    background-color: orange;
     color: white;
     font-family: 'Aldrich', sans-serif;
     text-align: center;
@@ -183,7 +169,6 @@ header{
 #p9{
     border-left: solid 2px white;
     border-bottom: solid 2px white;
-    background-color: orange;
     color: white;
     font-family: 'Aldrich', sans-serif;
     text-align: center;
@@ -193,7 +178,6 @@ header{
 #p9{
     border-left: solid 2px white;
     border-bottom: solid 2px white;
-    background-color: orange;
     color: white;
     font-family: 'Aldrich', sans-serif;
     text-align: center;
@@ -203,7 +187,6 @@ header{
 #p10{
     border-left: solid 2px white;
     border-bottom: solid 2px white;
-    background-color: orange;
     color: white;
     font-family: 'Aldrich', sans-serif;
     text-align: center;
@@ -214,7 +197,6 @@ header{
     border-left: solid 2px white;
     border-right: solid 2px white;
     border-bottom: solid 2px white;
-    background-color: green;
     color: white;
     font-family: 'Aldrich', sans-serif;
     text-align: center;
@@ -225,7 +207,6 @@ header{
     border-left: solid 2px white;
     border-right: solid 2px white;
     border-bottom: solid 2px white;
-    background-color: blueviolet;
     color: white;
     font-family: 'Aldrich', sans-serif;
     text-align: center;
@@ -236,7 +217,6 @@ header{
     border-left: solid 2px white;
     border-right: solid 2px white;
     border-bottom: solid 2px white;
-    background-color: blueviolet;
     color: white;
     font-family: 'Aldrich', sans-serif;
     text-align: center;
@@ -247,7 +227,6 @@ header{
     border-left: solid 2px white;
     border-right: solid 2px white;
     border-bottom: solid 2px white;
-    background-color: blueviolet;
     color: white;
     font-family: 'Aldrich', sans-serif;
     text-align: center;
@@ -258,7 +237,6 @@ header{
     border-left: solid 2px white;
     border-right: solid 2px white;
     border-bottom: solid 2px white;
-    background-color: blueviolet;
     color: white;
     font-family: 'Aldrich', sans-serif;
     text-align: center;
@@ -269,7 +247,6 @@ header{
     border-left: solid 2px white;
     border-right: solid 2px white;
     border-bottom: solid 2px white;
-    background-color: blueviolet;
     color: white;
     font-family: 'Aldrich', sans-serif;
     text-align: center;
@@ -280,7 +257,6 @@ header{
     border-left: solid 2px white;
     border-right: solid 2px white;
     border-bottom: solid 2px white;
-    background-color: blueviolet;
     color: white;
     font-family: 'Aldrich', sans-serif;
     text-align: center;
@@ -291,7 +267,6 @@ header{
     border-left: solid 2px white;
     border-right: solid 2px white;
     border-bottom: solid 2px white;
-    background-color: blueviolet;
     color: white;
     font-family: 'Aldrich', sans-serif;
     text-align: center;
@@ -302,7 +277,6 @@ header{
     border-left: solid 2px white;
     border-right: solid 2px white;
     border-bottom: solid 2px white;
-    background-color: blueviolet;
     color: white;
     font-family: 'Aldrich', sans-serif;
     text-align: center;
@@ -313,7 +287,6 @@ header{
     border-left: solid 2px white;
     border-right: solid 2px white;
     border-bottom: solid 2px white;
-    background-color: blueviolet;
     color: white;
     font-family: 'Aldrich', sans-serif;
     text-align: center;
@@ -324,7 +297,6 @@ header{
     border-left: solid 2px white;
     border-right: solid 2px white;
     border-bottom: solid 2px white;
-    background-color: blueviolet;
     color: white;
     font-family: 'Aldrich', sans-serif;
     text-align: center;

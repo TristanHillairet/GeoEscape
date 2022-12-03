@@ -1,0 +1,24 @@
+body {
+    background-color: #E9967A	;
+    margin: 0;
+    overflow-x: hidden;
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1250px 1fr;
+    grid-template-rows: 50px 50px 1fr 50px;
+}
+
+/*en tête de la page*/
+header{
+    color: white;
+    font-family: 'Aldrich', sans-serif;
+    text-align: center;
+    grid-column: 1/span 3;
+    grid-row: 1;
+}
+
+#confetti{
+    display: block;
+    width: 70%;
+    margin: auto;
+}
