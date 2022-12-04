@@ -14,8 +14,8 @@ body {
 /*en-tête de la page*/
 header{
     color: white;
-    border-bottom: solid 50px black;
-    background-color: black;
+    border-bottom: solid 50px #08381d;
+    background-color: #08381d;
     font-family: 'Aldrich', sans-serif;
     text-align: center;
     grid-column: 1/ span 2;

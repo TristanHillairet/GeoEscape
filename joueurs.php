@@ -9,7 +9,6 @@ if (isset($_POST['nom'])){
     mysqli_query($link, $query);
 
     echo 'base de donnée modifiée';
-
 }
 
 else if (isset($_POST['time'])){

@@ -2,7 +2,7 @@
 
 /*en tête de la page*/
 header{
-    background-color: black;
+    background-color: #08381d;
     color: white;
     font-family: 'Aldrich', sans-serif;
     text-align: center;
@@ -12,7 +12,9 @@ header{
 
 /*corps de la page*/
 body {
-    background-image: url(image_icon/acceuil.jpeg) ;
+    background-image: url(image_icon/tableau_vert.jpg);
+    background-size:cover;
+    background-position:center;
     margin: 0;
     overflow-x: hidden;
     min-height: 100vh;
@@ -57,14 +59,15 @@ body {
 }
 
 /*Bouton commencer*/
-#start{
+
+a{
     color: white;
     font-family: 'Aldrich', sans-serif;
     text-align: center;
     grid-column: 1;
     grid-row: 12;
 }
-#start .button #debut{
+a .button #debut{
     border: solid 2px white;
     border-radius: 20px;
     color: white;
@@ -72,7 +75,7 @@ body {
     font-size:24px;
     font-family: 'Aldrich', sans-serif;
 }
-#start .button #debut:hover{
+a .button #debut:hover{
     background-color: white;
     border: solid 2px darkred;
     border-radius: 20px;

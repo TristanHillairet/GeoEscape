@@ -2,8 +2,7 @@
 
 /*INITIALISE LE TEMPS*/
 let date_start = new Date();
-let time_start = date_start.getTime()
-console.log(time_start);
+let time_start = date_start.getTime();
 
 /*AFFICHAGE DE LA CARTE*/
 let paris = [48.856614, 2.3522219];/*Point de départ*/
@@ -22,7 +21,6 @@ fetch('objets.php', {
 })
 .then(r => r.json())
 .then(r => { 
-  console.log(r);
   for (i=0;i<13;i++){
     let id = r[i]['id_objet'];
     let lat = r[i]['lat'];    
@@ -31,7 +29,8 @@ fetch('objets.php', {
     let icone = r[i]['url'];
     let popup = r[i]['popup'];
     let debut = r[i]['debut'];
-    let type = r[i]['type'];                          //si 1 : récupérable ; si 2 : bloqué par code ; 3 :bloqué par objet ; 4: aucun des 3 
+    let type = r[i]['type'];                          
+    //si 1 : récupérable ; si 2 : bloqué par code ; 3 :bloqué par objet ; 4: aucun des 3 ; 5: objet de fin du jeu
     let id_objet_bloque = r[i]['id_objet_bloque'];
     let id_necessaire_pour_debloque = r[i]['id_necessaire_pour_debloque'];
     let code = r[i]['code'];
@@ -51,7 +50,6 @@ let layergroup_10 = L.layerGroup();
 let layergroup_14 = L.layerGroup();
 let layergroup_16 = L.layerGroup(); 
 
-// fonction d'initialisation
 function initialisation(lat,lon,zoom_m,icone,popup,type,id,id_objet_bloque,id_necessaire_pour_debloque,code,size_icone_x,size_icone_y,indice,bool_indice){
   if (zoom_m == 10){
     createMarker10(lat,lon,icone,popup,type,id,id_objet_bloque,id_necessaire_pour_debloque,code,size_icone_x,size_icone_y,indice,bool_indice);/*cf création markers*/
@@ -62,7 +60,8 @@ function initialisation(lat,lon,zoom_m,icone,popup,type,id,id_objet_bloque,id_ne
   }
 }
 
-//Création d'un marker de niveau de zoom minimum 10
+  //Création de marker en fonction du niveau de zoom afin de les ranger dans des layergroup 
+  //composés de markers avec le même niveau de zoom.
 function createMarker10(lat,lon,icone,popup,type,id,id_objet_bloque,id_necessaire_pour_debloque,code,size_icone_x,size_icone_y,indice,bool_indice){
   var img = L.icon({
     iconUrl: icone,
@@ -71,8 +70,8 @@ function createMarker10(lat,lon,icone,popup,type,id,id_objet_bloque,id_necessair
     popupAnchor: [-3, -20]
   });
   var marker = new L.Marker([lat,lon], {
-              icon: img,/*Transfert de l'icone de l'objet au marker*/
-              type_objet:type,/*Transfert du status de prenabilité au marker*/
+              icon: img,  /*Transfert de l'icone de l'objet au marker*/
+              type_objet:type,  
               id_objet:id,
               id_objet_bloque:id_objet_bloque,
               id_necessaire_pour_debloque:id_necessaire_pour_debloque,
@@ -81,8 +80,8 @@ function createMarker10(lat,lon,icone,popup,type,id,id_objet_bloque,id_necessair
               bool_indice : bool_indice
              })
   marker.bindPopup(popup);
-  layergroup_10.addLayer(marker);/*Ajout du marker au layer10*/
-  marker.on('click',recherche_type);
+  layergroup_10.addLayer(marker); /*Ajout du marker au layer10*/
+  marker.on('click',recherche_type); /* événement déclenché lorsque l'on clique sur l'objet afin de l'envoyer vers les fonctions de traitement de celui-ci.*/  
   marker.bindPopup(popup);
   marker.on('mouseover', function (e) {
     this.openPopup();
@@ -92,7 +91,6 @@ function createMarker10(lat,lon,icone,popup,type,id,id_objet_bloque,id_necessair
   });
 }
 
-//Création d'un marker de niveau de zoom minimum 14
 function createMarker14(lat,lon,icone,popup,type,id,id_objet_bloque,id_necessaire_pour_debloque,code,size_icone_x,size_icone_y,indice,bool_indice){
   var img = L.icon({
     iconUrl: icone,
@@ -101,8 +99,8 @@ function createMarker14(lat,lon,icone,popup,type,id,id_objet_bloque,id_necessair
     popupAnchor: [-3, -20]
   });
   var marker = new L.Marker([lat,lon], {
-              icon: img,/*Transfert de l'icone de l'objet au marker*/
-              type_objet: type,/*Transfert du status de prenabilité au marker*/
+              icon: img,
+              type_objet: type,
               id_objet:id,
               id_objet_bloque:id_objet_bloque,
               id_necessaire_pour_debloque:id_necessaire_pour_debloque,
@@ -111,7 +109,7 @@ function createMarker14(lat,lon,icone,popup,type,id,id_objet_bloque,id_necessair
               bool_indice:bool_indice
             });
   marker.bindPopup(popup);
-  layergroup_14.addLayer(marker);/*Ajout du marker au layer14*/
+  layergroup_14.addLayer(marker);
   marker.on('click',recherche_type);
   marker.bindPopup(popup);
   marker.on('mouseover', function (e) {
@@ -122,7 +120,6 @@ function createMarker14(lat,lon,icone,popup,type,id,id_objet_bloque,id_necessair
   });
 }
 
-//Création d'un marker de niveau de zoom minimum 16
 function createMarker16(lat,lon,icone,popup,type,id,id_objet_bloque,id_necessaire_pour_debloque,code,size_icone_x,size_icone_y,indice,bool_indice){
   var img = L.icon({
     iconUrl: icone,
@@ -131,8 +128,8 @@ function createMarker16(lat,lon,icone,popup,type,id,id_objet_bloque,id_necessair
     popupAnchor: [-3, -20]
   });
   var marker = new L.Marker([lat,lon], {
-              icon: img,/*Transfert de l'icone de l'objet au marker*/
-              type_objet: type,/*Transfert du status de prenabilité au marker*/
+              icon: img,
+              type_objet: type,
               id_objet: id,
               id_objet_bloque:id_objet_bloque,
               id_necessaire_pour_debloque:id_necessaire_pour_debloque,
@@ -141,7 +138,7 @@ function createMarker16(lat,lon,icone,popup,type,id,id_objet_bloque,id_necessair
               bool_indice:bool_indice
             })
   marker.bindPopup(popup);
-  layergroup_16.addLayer(marker);/*Ajout du marker au layer16*/
+  layergroup_16.addLayer(marker);
   marker.on('click',recherche_type)
   marker.bindPopup(popup);
   marker.on('mouseover', function (e) {
@@ -152,7 +149,7 @@ function createMarker16(lat,lon,icone,popup,type,id,id_objet_bloque,id_necessair
   });
 }
 
-//Affichage des markers de niveau de zoom correspondant
+//Affichage des groupes de markers en fonction de leurs niveau de zoom 
 map.on('zoom',function(){
   var zoom = map.getZoom();
   console.log(zoom);
@@ -175,6 +172,7 @@ map.on('zoom',function(){
   }
 })
 
+/* FONCTION QUI REPARTIT VERS LES BONS TRAITEMENTS QUE L'OBJET DOIT SUBIR (en fonction de s'il est récupérable, bloqué par un code ou un objet).*/
 
 function recherche_type(e){
   var typ = e.target.options.type_objet;
@@ -189,7 +187,7 @@ function recherche_type(e){
   }
 }
 
-/*MISE DES OBJETS DANS L'INVENTAIRE*/
+/*RECUPERATION D'UN MARKER*/
 let inventaire = [];
 
 function recup(e){
@@ -199,7 +197,8 @@ function recup(e){
   affiche_inventaire_apres_recup(inventaire);
 };
 
-//Affiche l'objet dans l'inventaire
+/*AFFICHAGE DANS L'INVENTAIRE*/
+
 function affiche_inventaire_apres_recup(inventaire){
   for (i=0;i<inventaire.length;i++){
     var url_icone = inventaire[i].target.options.icon.options.iconUrl;
@@ -210,7 +209,6 @@ function affiche_inventaire_apres_recup(inventaire){
   }
 }
 
-//Affiche l'objet débloqué par un objet dans l'inventaire
 function affiche_inventaire_apres_debloque(inventaire){
   var j=1;
   for (i=0;i<inventaire.length;i++){
@@ -258,22 +256,24 @@ function connexion_bdd_objet(body){
   })
 }
 
-/*DEBLOQUER UN OBJET*/
+/*DEBLOQUER UN OBJET BLOQUE PAR UN AUTRE OBJET*/
 function debloque_objet(e){
   var id_obj_pour_debloque = e.target.options.id_necessaire_pour_debloque
   for (i=0;i<=inventaire.length;i++){                 // pas necessaire pour nous, mais si on veut rajouter des objets si
-    if (inventaire[i].target.options.id_objet == id_obj_pour_debloque){
+    console.log(inventaire[i]);
+    if (inventaire.length!=0 && inventaire[i].target.options.id_objet == id_obj_pour_debloque){
       var id_obj_debloque = 'id_obj_debloque='+ e.target.options.id_objet_bloque;
       connexion_bdd_objet(id_obj_debloque);
       e.target.remove();
-      inventaire.splice(i,1);
-    } else if (e.target.options.bool_indice==0){
-      e.target._popup._content = e.target._popup._content + e.target.options.indice;
-      console.log(e.target.options.indice);
-      e.target.options.bool_indice = 1;
-    }
-    affiche_inventaire_apres_debloque(inventaire);
+      inventaire.splice(i,1);}
   }
+  if (e.target.options.bool_indice==0){
+    e.target._popup._content = e.target._popup._content + e.target.options.indice;
+    console.log(e.target.options.bool_indice);
+    console.log(e.target.options.indice);
+    e.target.options.bool_indice = 1;
+  }
+  affiche_inventaire_apres_debloque(inventaire);
 }
 
 /*DEBLOQUER UN OBJET BLOQUE PAR CODE*/

@@ -13,7 +13,7 @@ body {
 
 /*en tête de la page*/
 header{
-    background-color: black;
+    background-color: #08381d;
     color: white;
     font-family: 'Aldrich', sans-serif;
     text-align: center;
@@ -22,14 +22,11 @@ header{
 }
 
 /*image animée des confettis*/
-#confetti{
-    display: block;
-    width: 100%;
-    margin: auto;
-}
+
 
 /*textes*/
 #felicitations {
+    background-image: url(image_icon/confetti.gif);
     border-top: solid white 5px;
     border-top-left-radius: 20px;
     border-top-right-radius: 20px;
